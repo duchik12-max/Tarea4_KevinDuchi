@@ -1,5 +1,7 @@
 #pragma once
-
+#include "citaForm.h"
+#include "tratamientoForm.h"
+#include "historiaForm.h"
 namespace Tarea4KD {
 
 	using namespace System;
@@ -40,7 +42,7 @@ namespace Tarea4KD {
 	private: System::Windows::Forms::ToolStripMenuItem^ tratamientoToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ agendarToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ salirToolStripMenuItem;
-	private: System::Windows::Forms::Panel^ panel1;
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 
@@ -63,11 +65,9 @@ namespace Tarea4KD {
 			this->tratamientoToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->agendarToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->salirToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->menuStrip1->SuspendLayout();
-			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -90,6 +90,7 @@ namespace Tarea4KD {
 			this->historiaClinicaToolStripMenuItem->Name = L"historiaClinicaToolStripMenuItem";
 			this->historiaClinicaToolStripMenuItem->Size = System::Drawing::Size(143, 24);
 			this->historiaClinicaToolStripMenuItem->Text = L"Historia Clinica";
+			this->historiaClinicaToolStripMenuItem->Click += gcnew System::EventHandler(this, &menuPacienForm::historiaClinicaToolStripMenuItem_Click);
 			// 
 			// tratamientoToolStripMenuItem
 			// 
@@ -97,6 +98,7 @@ namespace Tarea4KD {
 			this->tratamientoToolStripMenuItem->Name = L"tratamientoToolStripMenuItem";
 			this->tratamientoToolStripMenuItem->Size = System::Drawing::Size(123, 24);
 			this->tratamientoToolStripMenuItem->Text = L"Tratamiento";
+			this->tratamientoToolStripMenuItem->Click += gcnew System::EventHandler(this, &menuPacienForm::tratamientoToolStripMenuItem_Click);
 			// 
 			// agendarToolStripMenuItem
 			// 
@@ -104,6 +106,7 @@ namespace Tarea4KD {
 			this->agendarToolStripMenuItem->Name = L"agendarToolStripMenuItem";
 			this->agendarToolStripMenuItem->Size = System::Drawing::Size(100, 24);
 			this->agendarToolStripMenuItem->Text = L"Agendar";
+			this->agendarToolStripMenuItem->Click += gcnew System::EventHandler(this, &menuPacienForm::agendarToolStripMenuItem_Click);
 			// 
 			// salirToolStripMenuItem
 			// 
@@ -113,48 +116,42 @@ namespace Tarea4KD {
 			this->salirToolStripMenuItem->Text = L"Salir";
 			this->salirToolStripMenuItem->Click += gcnew System::EventHandler(this, &menuPacienForm::salirToolStripMenuItem_Click);
 			// 
-			// panel1
+			// label1
 			// 
-			this->panel1->Controls->Add(this->label1);
-			this->panel1->Controls->Add(this->pictureBox1);
-			this->panel1->Location = System::Drawing::Point(48, 53);
-			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(472, 338);
-			this->panel1->TabIndex = 1;
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->Location = System::Drawing::Point(226, 300);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(180, 20);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"Bienvenido Paciente";
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(54, 30);
+			this->pictureBox1->Location = System::Drawing::Point(110, 76);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(358, 214);
+			this->pictureBox1->Size = System::Drawing::Size(380, 191);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
-			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(175, 275);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(131, 16);
-			this->label1->TabIndex = 1;
-			this->label1->Text = L"Bienvenido Paciente";
 			// 
 			// menuPacienForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(581, 433);
-			this->Controls->Add(this->panel1);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->menuStrip1);
+			this->IsMdiContainer = true;
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"menuPacienForm";
 			this->Text = L"menuPacienForm";
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
-			this->panel1->ResumeLayout(false);
-			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -162,7 +159,20 @@ namespace Tarea4KD {
 		}
 #pragma endregion
 	private: System::Void salirToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		MessageBox::Show("Saliendo del menu", "Salida", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		this->Close();
 	}
+private: System::Void historiaClinicaToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	historiaForm^ historia1 = gcnew historiaForm();
+	historia1->Show();
+}
+private: System::Void tratamientoToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	tratamientoForm^ tratamiento1 = gcnew tratamientoForm();
+	tratamiento1->Show();
+}
+private: System::Void agendarToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	citaForm^ cita1 = gcnew citaForm();
+	cita1->Show();
+}
 };
 }

@@ -56,10 +56,10 @@ namespace Tarea4KD {
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(mainForm::typeid));
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
@@ -76,6 +76,36 @@ namespace Tarea4KD {
 			this->panel1->TabIndex = 0;
 			this->panel1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &mainForm::panel1_Paint);
 			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(11, 378);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(77, 16);
+			this->label2->TabIndex = 3;
+			this->label2->Text = L"Kevin Duchi";
+			// 
+			// button1
+			// 
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Tai Le", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button1->Location = System::Drawing::Point(573, 346);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(93, 31);
+			this->button1->TabIndex = 2;
+			this->button1->Text = L"Iniciar";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &mainForm::button1_Click);
+			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
+			this->pictureBox1->Location = System::Drawing::Point(14, 44);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(672, 350);
+			this->pictureBox1->TabIndex = 1;
+			this->pictureBox1->TabStop = false;
+			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
@@ -87,42 +117,15 @@ namespace Tarea4KD {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Hospital del Dia IESS Sangolqui";
 			// 
-			// pictureBox1
-			// 
-			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(14, 44);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(672, 350);
-			this->pictureBox1->TabIndex = 1;
-			this->pictureBox1->TabStop = false;
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(591, 354);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(75, 23);
-			this->button1->TabIndex = 2;
-			this->button1->Text = L"Inicio";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &mainForm::button1_Click);
-			// 
-			// label2
-			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(11, 378);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(77, 16);
-			this->label2->TabIndex = 3;
-			this->label2->Text = L"Kevin Duchi";
-			// 
 			// mainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(785, 421);
 			this->Controls->Add(this->panel1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"mainForm";
-			this->Text = L"mainForm";
+			this->Text = L"Inicio";
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();

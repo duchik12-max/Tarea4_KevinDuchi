@@ -3,14 +3,15 @@ using namespace System;
 using namespace System::Windows::Forms;
 // Esta línea asegura que se use el punto de entrada main en lugar de WinMain
 [STAThread]
-void main(array<String^>^ arg)
+int main(cli::array<System::String^>^ args)
 {
-	Application::EnableVisualStyles();
+    Application::EnableVisualStyles();
+    Application::SetCompatibleTextRenderingDefault(false);
 
-	Application::SetCompatibleTextRenderingDefault(false);
-	// Crea una instancia de tu formulario principal y lo ejecuta
-		Tarea4KD::mainForm form;
-	Application::Run(% form);
+    Tarea4KD::mainForm form;
+    Application::Run(% form);
+
+    return 0;
 }
 
 

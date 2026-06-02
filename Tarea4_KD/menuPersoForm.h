@@ -1,5 +1,7 @@
 #pragma once
-
+#include "doctorForm.h"
+#include "boticarioForm.h"
+#include "laboratorioForm.h"
 namespace Tarea4KD {
 
 	using namespace System;
@@ -40,7 +42,7 @@ namespace Tarea4KD {
 	private: System::Windows::Forms::ToolStripMenuItem^ boticarioToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ laboratorioToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ salirToolStripMenuItem;
-	private: System::Windows::Forms::Panel^ panel1;
+
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::Label^ label1;
 
@@ -63,11 +65,9 @@ namespace Tarea4KD {
 			this->boticarioToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->laboratorioToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->salirToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->menuStrip1->SuspendLayout();
-			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -90,6 +90,7 @@ namespace Tarea4KD {
 			this->doctorToolStripMenuItem->Name = L"doctorToolStripMenuItem";
 			this->doctorToolStripMenuItem->Size = System::Drawing::Size(89, 24);
 			this->doctorToolStripMenuItem->Text = L"Doctor";
+			this->doctorToolStripMenuItem->Click += gcnew System::EventHandler(this, &menuPersoForm::doctorToolStripMenuItem_Click);
 			// 
 			// boticarioToolStripMenuItem
 			// 
@@ -97,6 +98,7 @@ namespace Tarea4KD {
 			this->boticarioToolStripMenuItem->Name = L"boticarioToolStripMenuItem";
 			this->boticarioToolStripMenuItem->Size = System::Drawing::Size(103, 24);
 			this->boticarioToolStripMenuItem->Text = L"Boticario";
+			this->boticarioToolStripMenuItem->Click += gcnew System::EventHandler(this, &menuPersoForm::boticarioToolStripMenuItem_Click);
 			// 
 			// laboratorioToolStripMenuItem
 			// 
@@ -104,6 +106,7 @@ namespace Tarea4KD {
 			this->laboratorioToolStripMenuItem->Name = L"laboratorioToolStripMenuItem";
 			this->laboratorioToolStripMenuItem->Size = System::Drawing::Size(121, 24);
 			this->laboratorioToolStripMenuItem->Text = L"Laboratorio";
+			this->laboratorioToolStripMenuItem->Click += gcnew System::EventHandler(this, &menuPersoForm::laboratorioToolStripMenuItem_Click);
 			// 
 			// salirToolStripMenuItem
 			// 
@@ -111,54 +114,65 @@ namespace Tarea4KD {
 			this->salirToolStripMenuItem->Name = L"salirToolStripMenuItem";
 			this->salirToolStripMenuItem->Size = System::Drawing::Size(72, 24);
 			this->salirToolStripMenuItem->Text = L"Salir";
-			// 
-			// panel1
-			// 
-			this->panel1->Controls->Add(this->label1);
-			this->panel1->Controls->Add(this->pictureBox1);
-			this->panel1->Location = System::Drawing::Point(74, 49);
-			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(423, 283);
-			this->panel1->TabIndex = 1;
-			// 
-			// pictureBox1
-			// 
-			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(50, 31);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(319, 188);
-			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
-			this->pictureBox1->TabIndex = 0;
-			this->pictureBox1->TabStop = false;
+			this->salirToolStripMenuItem->Click += gcnew System::EventHandler(this, &menuPersoForm::salirToolStripMenuItem_Click);
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(160, 244);
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->Location = System::Drawing::Point(242, 282);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(109, 16);
+			this->label1->Size = System::Drawing::Size(149, 20);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Personal Medico";
+			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
+			this->pictureBox1->Location = System::Drawing::Point(113, 67);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(401, 190);
+			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pictureBox1->TabIndex = 0;
+			this->pictureBox1->TabStop = false;
 			// 
 			// menuPersoForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(626, 385);
-			this->Controls->Add(this->panel1);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->menuStrip1);
+			this->IsMdiContainer = true;
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"menuPersoForm";
 			this->Text = L"menuPersoForm";
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
-			this->panel1->ResumeLayout(false);
-			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	};
+	private: System::Void salirToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		MessageBox::Show("Saliendo del menu", "Salida", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		this->Close();
+	}
+private: System::Void doctorToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	doctorForm^ doctor1 = gcnew doctorForm();
+	doctor1->Show();
+}
+private: System::Void boticarioToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	boticarioForm^ boticario1 = gcnew boticarioForm();
+	boticario1->Show();
+}
+private: System::Void laboratorioToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	laboratorioForm^ laboratorio1 = gcnew laboratorioForm();
+	laboratorio1->Show();
+}
+};
 }

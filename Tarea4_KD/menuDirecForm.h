@@ -1,5 +1,7 @@
 #pragma once
-
+#include "informeForm.h"
+#include "asignacionForm.h"
+#include "insumosForm.h"
 namespace Tarea4KD {
 
 	using namespace System;
@@ -40,7 +42,7 @@ namespace Tarea4KD {
 	private: System::Windows::Forms::ToolStripMenuItem^ asignarPersonalToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ gestionarInsumosToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ salirToolStripMenuItem;
-	private: System::Windows::Forms::Panel^ panel1;
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 
@@ -63,11 +65,9 @@ namespace Tarea4KD {
 			this->asignarPersonalToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->gestionarInsumosToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->salirToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->menuStrip1->SuspendLayout();
-			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -90,6 +90,7 @@ namespace Tarea4KD {
 			this->informeToolStripMenuItem->Name = L"informeToolStripMenuItem";
 			this->informeToolStripMenuItem->Size = System::Drawing::Size(95, 24);
 			this->informeToolStripMenuItem->Text = L"Informe";
+			this->informeToolStripMenuItem->Click += gcnew System::EventHandler(this, &menuDirecForm::informeToolStripMenuItem_Click);
 			// 
 			// asignarPersonalToolStripMenuItem
 			// 
@@ -97,6 +98,7 @@ namespace Tarea4KD {
 			this->asignarPersonalToolStripMenuItem->Name = L"asignarPersonalToolStripMenuItem";
 			this->asignarPersonalToolStripMenuItem->Size = System::Drawing::Size(148, 24);
 			this->asignarPersonalToolStripMenuItem->Text = L"AsignarPersonal";
+			this->asignarPersonalToolStripMenuItem->Click += gcnew System::EventHandler(this, &menuDirecForm::asignarPersonalToolStripMenuItem_Click);
 			// 
 			// gestionarInsumosToolStripMenuItem
 			// 
@@ -104,6 +106,7 @@ namespace Tarea4KD {
 			this->gestionarInsumosToolStripMenuItem->Name = L"gestionarInsumosToolStripMenuItem";
 			this->gestionarInsumosToolStripMenuItem->Size = System::Drawing::Size(164, 24);
 			this->gestionarInsumosToolStripMenuItem->Text = L"Gestionar Insumos";
+			this->gestionarInsumosToolStripMenuItem->Click += gcnew System::EventHandler(this, &menuDirecForm::gestionarInsumosToolStripMenuItem_Click);
 			// 
 			// salirToolStripMenuItem
 			// 
@@ -113,30 +116,24 @@ namespace Tarea4KD {
 			this->salirToolStripMenuItem->Text = L"Salir";
 			this->salirToolStripMenuItem->Click += gcnew System::EventHandler(this, &menuDirecForm::salirToolStripMenuItem_Click);
 			// 
-			// panel1
-			// 
-			this->panel1->Controls->Add(this->label1);
-			this->panel1->Controls->Add(this->pictureBox1);
-			this->panel1->Location = System::Drawing::Point(82, 67);
-			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(421, 271);
-			this->panel1->TabIndex = 1;
-			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(112, 212);
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->Location = System::Drawing::Point(200, 297);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(199, 16);
+			this->label1->Size = System::Drawing::Size(278, 20);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Bienvenido Director de Medicos";
+			this->label1->Click += gcnew System::EventHandler(this, &menuDirecForm::label1_Click);
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(40, 23);
+			this->pictureBox1->Location = System::Drawing::Point(123, 73);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(342, 171);
+			this->pictureBox1->Size = System::Drawing::Size(403, 192);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
@@ -146,15 +143,16 @@ namespace Tarea4KD {
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(626, 418);
-			this->Controls->Add(this->panel1);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->menuStrip1);
+			this->IsMdiContainer = true;
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"menuDirecForm";
 			this->Text = L"menuDirecForm";
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
-			this->panel1->ResumeLayout(false);
-			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -162,7 +160,23 @@ namespace Tarea4KD {
 		}
 #pragma endregion
 	private: System::Void salirToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		MessageBox::Show("Saliendo del menu", "Salida", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		this -> Close();
 	}
+private: System::Void informeToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	informeForm^ informe1 = gcnew informeForm();
+	informe1->Show();
+
+}
+private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void asignarPersonalToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	asignacionForm^ asig1 = gcnew asignacionForm();
+	asig1->Show();
+}
+private: System::Void gestionarInsumosToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	insumosForm^ insumos1 = gcnew insumosForm();
+	insumos1->Show();
+}
 };
 }

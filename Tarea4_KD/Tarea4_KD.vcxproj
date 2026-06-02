@@ -120,13 +120,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="asignacionForm.cpp" />
+    <ClCompile Include="boticarioForm.cpp" />
+    <ClCompile Include="citaForm.cpp" />
+    <ClCompile Include="doctorForm.cpp" />
+    <ClCompile Include="historiaForm.cpp" />
+    <ClCompile Include="informeForm.cpp" />
+    <ClCompile Include="insumosForm.cpp" />
+    <ClCompile Include="laboratorioForm.cpp" />
     <ClCompile Include="loginForm.cpp" />
     <ClCompile Include="mainForm.cpp" />
     <ClCompile Include="menuDirecForm.cpp" />
     <ClCompile Include="menuPacienForm.cpp" />
     <ClCompile Include="menuPersoForm.cpp" />
+    <ClCompile Include="tratamientoForm.cpp" />
+    <ClCompile Include="Usuario.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="asignacionForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="boticarioForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="citaForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="doctorForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="historiaForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="informeForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="insumosForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="laboratorioForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="loginForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -142,8 +176,36 @@
     <ClInclude Include="menuPersoForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="tratamientoForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Usuario.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="asignacionForm.resx">
+      <DependentUpon>asignacionForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="boticarioForm.resx">
+      <DependentUpon>boticarioForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="citaForm.resx">
+      <DependentUpon>citaForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="doctorForm.resx">
+      <DependentUpon>doctorForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="historiaForm.resx">
+      <DependentUpon>historiaForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="informeForm.resx">
+      <DependentUpon>informeForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="insumosForm.resx">
+      <DependentUpon>insumosForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="laboratorioForm.resx">
+      <DependentUpon>laboratorioForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="loginForm.resx">
       <DependentUpon>loginForm.h</DependentUpon>
     </EmbeddedResource>
@@ -158,6 +220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="menuPersoForm.resx">
       <DependentUpon>menuPersoForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tratamientoForm.resx">
+      <DependentUpon>tratamientoForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
