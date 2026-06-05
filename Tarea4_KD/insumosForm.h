@@ -37,14 +37,16 @@ namespace Tarea4KD {
 	private: System::Windows::Forms::Panel^ panel1;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ btnInsumos;
+	private: System::Windows::Forms::TextBox^ txtInsumo;
 
-	private: System::Windows::Forms::TextBox^ textBox1;
+
 
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
-	private: System::Windows::Forms::ComboBox^ comboBox1;
+	private: System::Windows::Forms::ComboBox^ comboInsuArea;
+
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
 	protected:
 
@@ -64,10 +66,10 @@ namespace Tarea4KD {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(insumosForm::typeid));
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->comboInsuArea = (gcnew System::Windows::Forms::ComboBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->btnInsumos = (gcnew System::Windows::Forms::Button());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->txtInsumo = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -80,10 +82,10 @@ namespace Tarea4KD {
 			// panel1
 			// 
 			this->panel1->Controls->Add(this->pictureBox2);
-			this->panel1->Controls->Add(this->comboBox1);
+			this->panel1->Controls->Add(this->comboInsuArea);
 			this->panel1->Controls->Add(this->button2);
 			this->panel1->Controls->Add(this->btnInsumos);
-			this->panel1->Controls->Add(this->textBox1);
+			this->panel1->Controls->Add(this->txtInsumo);
 			this->panel1->Controls->Add(this->label3);
 			this->panel1->Controls->Add(this->label2);
 			this->panel1->Controls->Add(this->label1);
@@ -104,14 +106,14 @@ namespace Tarea4KD {
 			this->pictureBox2->TabIndex = 9;
 			this->pictureBox2->TabStop = false;
 			// 
-			// comboBox1
+			// comboInsuArea
 			// 
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Farmacia", L"Consulta", L"Laboratorio", L"Quirófano" });
-			this->comboBox1->Location = System::Drawing::Point(479, 192);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(121, 24);
-			this->comboBox1->TabIndex = 8;
+			this->comboInsuArea->FormattingEnabled = true;
+			this->comboInsuArea->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Farmacia", L"Consulta", L"Laboratorio", L"Quirófano" });
+			this->comboInsuArea->Location = System::Drawing::Point(479, 192);
+			this->comboInsuArea->Name = L"comboInsuArea";
+			this->comboInsuArea->Size = System::Drawing::Size(121, 24);
+			this->comboInsuArea->TabIndex = 8;
 			// 
 			// button2
 			// 
@@ -138,13 +140,13 @@ namespace Tarea4KD {
 			this->btnInsumos->UseVisualStyleBackColor = true;
 			this->btnInsumos->Click += gcnew System::EventHandler(this, &insumosForm::button1_Click);
 			// 
-			// textBox1
+			// txtInsumo
 			// 
-			this->textBox1->Location = System::Drawing::Point(427, 139);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(173, 22);
-			this->textBox1->TabIndex = 5;
-			this->textBox1->TextChanged += gcnew System::EventHandler(this, &insumosForm::textBox1_TextChanged);
+			this->txtInsumo->Location = System::Drawing::Point(427, 139);
+			this->txtInsumo->Name = L"txtInsumo";
+			this->txtInsumo->Size = System::Drawing::Size(173, 22);
+			this->txtInsumo->TabIndex = 5;
+			this->txtInsumo->TextChanged += gcnew System::EventHandler(this, &insumosForm::textBox1_TextChanged);
 			// 
 			// label3
 			// 

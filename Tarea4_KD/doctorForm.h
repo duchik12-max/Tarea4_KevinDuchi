@@ -43,10 +43,13 @@ namespace Tarea4KD {
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ btnReceta;
+	private: System::Windows::Forms::TextBox^ txtDocIndica;
 
-	private: System::Windows::Forms::TextBox^ textBox3;
-	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::TextBox^ textBox1;
+
+	private: System::Windows::Forms::TextBox^ txtDocTratam;
+
+	private: System::Windows::Forms::TextBox^ textDocPaciente;
+
 	protected:
 
 	private:
@@ -66,9 +69,9 @@ namespace Tarea4KD {
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->btnReceta = (gcnew System::Windows::Forms::Button());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->txtDocIndica = (gcnew System::Windows::Forms::TextBox());
+			this->txtDocTratam = (gcnew System::Windows::Forms::TextBox());
+			this->textDocPaciente = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
@@ -86,9 +89,9 @@ namespace Tarea4KD {
 			this->panel1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"panel1.BackgroundImage")));
 			this->panel1->Controls->Add(this->button2);
 			this->panel1->Controls->Add(this->btnReceta);
-			this->panel1->Controls->Add(this->textBox3);
-			this->panel1->Controls->Add(this->textBox2);
-			this->panel1->Controls->Add(this->textBox1);
+			this->panel1->Controls->Add(this->txtDocIndica);
+			this->panel1->Controls->Add(this->txtDocTratam);
+			this->panel1->Controls->Add(this->textDocPaciente);
 			this->panel1->Controls->Add(this->label4);
 			this->panel1->Controls->Add(this->label3);
 			this->panel1->Controls->Add(this->label2);
@@ -125,26 +128,26 @@ namespace Tarea4KD {
 			this->btnReceta->UseVisualStyleBackColor = true;
 			this->btnReceta->Click += gcnew System::EventHandler(this, &doctorForm::button1_Click);
 			// 
-			// textBox3
+			// txtDocIndica
 			// 
-			this->textBox3->Location = System::Drawing::Point(42, 305);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(197, 22);
-			this->textBox3->TabIndex = 8;
+			this->txtDocIndica->Location = System::Drawing::Point(42, 305);
+			this->txtDocIndica->Name = L"txtDocIndica";
+			this->txtDocIndica->Size = System::Drawing::Size(197, 22);
+			this->txtDocIndica->TabIndex = 8;
 			// 
-			// textBox2
+			// txtDocTratam
 			// 
-			this->textBox2->Location = System::Drawing::Point(42, 227);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(197, 22);
-			this->textBox2->TabIndex = 7;
+			this->txtDocTratam->Location = System::Drawing::Point(42, 227);
+			this->txtDocTratam->Name = L"txtDocTratam";
+			this->txtDocTratam->Size = System::Drawing::Size(197, 22);
+			this->txtDocTratam->TabIndex = 7;
 			// 
-			// textBox1
+			// textDocPaciente
 			// 
-			this->textBox1->Location = System::Drawing::Point(42, 151);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(197, 22);
-			this->textBox1->TabIndex = 6;
+			this->textDocPaciente->Location = System::Drawing::Point(42, 151);
+			this->textDocPaciente->Name = L"textDocPaciente";
+			this->textDocPaciente->Size = System::Drawing::Size(197, 22);
+			this->textDocPaciente->TabIndex = 6;
 			// 
 			// label4
 			// 

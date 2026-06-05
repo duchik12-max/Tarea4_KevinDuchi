@@ -44,12 +44,15 @@ namespace Tarea4KD {
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ btnCita;
+	private: System::Windows::Forms::TextBox^ txtCtNombre;
+	private: System::Windows::Forms::MonthCalendar^ monthCalendarCita;
 
 
 
-	private: System::Windows::Forms::TextBox^ textBox1;
-	private: System::Windows::Forms::MonthCalendar^ monthCalendar1;
-	private: System::Windows::Forms::ComboBox^ comboBox1;
+
+
+	private: System::Windows::Forms::ComboBox^ comboBoxCita;
+
 
 	private:
 		/// <summary>
@@ -66,17 +69,17 @@ namespace Tarea4KD {
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(citaForm::typeid));
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->monthCalendarCita = (gcnew System::Windows::Forms::MonthCalendar());
+			this->comboBoxCita = (gcnew System::Windows::Forms::ComboBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->btnCita = (gcnew System::Windows::Forms::Button());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->txtCtNombre = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
-			this->monthCalendar1 = (gcnew System::Windows::Forms::MonthCalendar());
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -85,11 +88,11 @@ namespace Tarea4KD {
 			// panel1
 			// 
 			this->panel1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"panel1.BackgroundImage")));
-			this->panel1->Controls->Add(this->monthCalendar1);
-			this->panel1->Controls->Add(this->comboBox1);
+			this->panel1->Controls->Add(this->monthCalendarCita);
+			this->panel1->Controls->Add(this->comboBoxCita);
 			this->panel1->Controls->Add(this->button2);
 			this->panel1->Controls->Add(this->btnCita);
-			this->panel1->Controls->Add(this->textBox1);
+			this->panel1->Controls->Add(this->txtCtNombre);
 			this->panel1->Controls->Add(this->label4);
 			this->panel1->Controls->Add(this->label3);
 			this->panel1->Controls->Add(this->label2);
@@ -100,6 +103,24 @@ namespace Tarea4KD {
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(615, 549);
 			this->panel1->TabIndex = 0;
+			// 
+			// monthCalendarCita
+			// 
+			this->monthCalendarCita->Location = System::Drawing::Point(122, 224);
+			this->monthCalendarCita->Name = L"monthCalendarCita";
+			this->monthCalendarCita->TabIndex = 12;
+			// 
+			// comboBoxCita
+			// 
+			this->comboBoxCita->FormattingEnabled = true;
+			this->comboBoxCita->Items->AddRange(gcnew cli::array< System::Object^  >(4) {
+				L"Dr. Fabian", L"Dr. Enrique", L"Dra. Milagro",
+					L"Dr. Gregory"
+			});
+			this->comboBoxCita->Location = System::Drawing::Point(167, 167);
+			this->comboBoxCita->Name = L"comboBoxCita";
+			this->comboBoxCita->Size = System::Drawing::Size(121, 24);
+			this->comboBoxCita->TabIndex = 11;
 			// 
 			// button2
 			// 
@@ -126,12 +147,12 @@ namespace Tarea4KD {
 			this->btnCita->UseVisualStyleBackColor = true;
 			this->btnCita->Click += gcnew System::EventHandler(this, &citaForm::button1_Click);
 			// 
-			// textBox1
+			// txtCtNombre
 			// 
-			this->textBox1->Location = System::Drawing::Point(167, 123);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(196, 22);
-			this->textBox1->TabIndex = 6;
+			this->txtCtNombre->Location = System::Drawing::Point(167, 123);
+			this->txtCtNombre->Name = L"txtCtNombre";
+			this->txtCtNombre->Size = System::Drawing::Size(196, 22);
+			this->txtCtNombre->TabIndex = 6;
 			// 
 			// label4
 			// 
@@ -196,24 +217,6 @@ namespace Tarea4KD {
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
-			// 
-			// comboBox1
-			// 
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(4) {
-				L"Dr. Fabian", L"Dr. Enrique", L"Dra. Milagro",
-					L"Dr. Gregory"
-			});
-			this->comboBox1->Location = System::Drawing::Point(167, 167);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(121, 24);
-			this->comboBox1->TabIndex = 11;
-			// 
-			// monthCalendar1
-			// 
-			this->monthCalendar1->Location = System::Drawing::Point(122, 224);
-			this->monthCalendar1->Name = L"monthCalendar1";
-			this->monthCalendar1->TabIndex = 12;
 			// 
 			// citaForm
 			// 

@@ -38,7 +38,8 @@ namespace Tarea4KD {
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::TextBox^ txtAsigNombre;
+
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label1;
@@ -48,7 +49,8 @@ namespace Tarea4KD {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
 	private: System::Windows::Forms::MonthCalendar^ monthCalendar1;
-	private: System::Windows::Forms::ComboBox^ comboBox1;
+	private: System::Windows::Forms::ComboBox^ comboBoxArea;
+
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
@@ -70,7 +72,7 @@ namespace Tarea4KD {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(asignacionForm::typeid));
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->comboBoxArea = (gcnew System::Windows::Forms::ComboBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->monthCalendar1 = (gcnew System::Windows::Forms::MonthCalendar());
 			this->button2 = (gcnew System::Windows::Forms::Button());
@@ -79,7 +81,7 @@ namespace Tarea4KD {
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->txtAsigNombre = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -93,13 +95,13 @@ namespace Tarea4KD {
 			// panel1
 			// 
 			this->panel1->Controls->Add(this->pictureBox2);
-			this->panel1->Controls->Add(this->comboBox1);
+			this->panel1->Controls->Add(this->comboBoxArea);
 			this->panel1->Controls->Add(this->label4);
 			this->panel1->Controls->Add(this->monthCalendar1);
 			this->panel1->Controls->Add(this->button2);
 			this->panel1->Controls->Add(this->btnAsignacion);
 			this->panel1->Controls->Add(this->dataGridView1);
-			this->panel1->Controls->Add(this->textBox1);
+			this->panel1->Controls->Add(this->txtAsigNombre);
 			this->panel1->Controls->Add(this->label3);
 			this->panel1->Controls->Add(this->label2);
 			this->panel1->Controls->Add(this->label1);
@@ -120,15 +122,15 @@ namespace Tarea4KD {
 			this->pictureBox2->TabIndex = 13;
 			this->pictureBox2->TabStop = false;
 			// 
-			// comboBox1
+			// comboBoxArea
 			// 
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Farmacia", L"Consulta", L"Laboratorio", L"Papeleo" });
-			this->comboBox1->Location = System::Drawing::Point(500, 139);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(133, 24);
-			this->comboBox1->TabIndex = 12;
-			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &asignacionForm::comboBox1_SelectedIndexChanged);
+			this->comboBoxArea->FormattingEnabled = true;
+			this->comboBoxArea->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Farmacia", L"Consulta", L"Laboratorio", L"Papeleo" });
+			this->comboBoxArea->Location = System::Drawing::Point(500, 139);
+			this->comboBoxArea->Name = L"comboBoxArea";
+			this->comboBoxArea->Size = System::Drawing::Size(133, 24);
+			this->comboBoxArea->TabIndex = 12;
+			this->comboBoxArea->SelectedIndexChanged += gcnew System::EventHandler(this, &asignacionForm::comboBox1_SelectedIndexChanged);
 			// 
 			// label4
 			// 
@@ -203,12 +205,12 @@ namespace Tarea4KD {
 			this->Column3->Name = L"Column3";
 			this->Column3->Width = 125;
 			// 
-			// textBox1
+			// txtAsigNombre
 			// 
-			this->textBox1->Location = System::Drawing::Point(41, 159);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(167, 22);
-			this->textBox1->TabIndex = 4;
+			this->txtAsigNombre->Location = System::Drawing::Point(41, 159);
+			this->txtAsigNombre->Name = L"txtAsigNombre";
+			this->txtAsigNombre->Size = System::Drawing::Size(167, 22);
+			this->txtAsigNombre->TabIndex = 4;
 			// 
 			// label3
 			// 

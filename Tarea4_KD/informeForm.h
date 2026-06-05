@@ -37,10 +37,11 @@ namespace Tarea4KD {
 	private: System::Windows::Forms::Panel^ panel1;
 	protected:
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
+	private: System::Windows::Forms::DataGridView^ tablaInforme;
 
 
 
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
+
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Paciente;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
 	private: System::Windows::Forms::Label^ label3;
@@ -50,9 +51,11 @@ namespace Tarea4KD {
 	private: System::Windows::Forms::Button^ btnInforme;
 
 	private: System::Windows::Forms::Button^ btnResumen;
+	private: System::Windows::Forms::TextBox^ txtDirecMedico;
 
-	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::TextBox^ textBox1;
+
+	private: System::Windows::Forms::TextBox^ txtDirecPaciente;
+
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
 
@@ -78,19 +81,19 @@ namespace Tarea4KD {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->btnInforme = (gcnew System::Windows::Forms::Button());
 			this->btnResumen = (gcnew System::Windows::Forms::Button());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->txtDirecMedico = (gcnew System::Windows::Forms::TextBox());
+			this->txtDirecPaciente = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->tablaInforme = (gcnew System::Windows::Forms::DataGridView());
 			this->Paciente = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaInforme))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -100,13 +103,13 @@ namespace Tarea4KD {
 			this->panel1->Controls->Add(this->button3);
 			this->panel1->Controls->Add(this->btnInforme);
 			this->panel1->Controls->Add(this->btnResumen);
-			this->panel1->Controls->Add(this->textBox2);
-			this->panel1->Controls->Add(this->textBox1);
+			this->panel1->Controls->Add(this->txtDirecMedico);
+			this->panel1->Controls->Add(this->txtDirecPaciente);
 			this->panel1->Controls->Add(this->label4);
 			this->panel1->Controls->Add(this->label3);
 			this->panel1->Controls->Add(this->label2);
 			this->panel1->Controls->Add(this->label1);
-			this->panel1->Controls->Add(this->dataGridView1);
+			this->panel1->Controls->Add(this->tablaInforme);
 			this->panel1->Controls->Add(this->pictureBox1);
 			this->panel1->Location = System::Drawing::Point(21, 12);
 			this->panel1->Name = L"panel1";
@@ -154,20 +157,20 @@ namespace Tarea4KD {
 			this->btnResumen->UseVisualStyleBackColor = true;
 			this->btnResumen->Click += gcnew System::EventHandler(this, &informeForm::button1_Click);
 			// 
-			// textBox2
+			// txtDirecMedico
 			// 
-			this->textBox2->Location = System::Drawing::Point(36, 285);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(178, 22);
-			this->textBox2->TabIndex = 8;
-			this->textBox2->TextChanged += gcnew System::EventHandler(this, &informeForm::textBox2_TextChanged);
+			this->txtDirecMedico->Location = System::Drawing::Point(36, 285);
+			this->txtDirecMedico->Name = L"txtDirecMedico";
+			this->txtDirecMedico->Size = System::Drawing::Size(178, 22);
+			this->txtDirecMedico->TabIndex = 8;
+			this->txtDirecMedico->TextChanged += gcnew System::EventHandler(this, &informeForm::textBox2_TextChanged);
 			// 
-			// textBox1
+			// txtDirecPaciente
 			// 
-			this->textBox1->Location = System::Drawing::Point(36, 214);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(178, 22);
-			this->textBox1->TabIndex = 7;
+			this->txtDirecPaciente->Location = System::Drawing::Point(36, 214);
+			this->txtDirecPaciente->Name = L"txtDirecPaciente";
+			this->txtDirecPaciente->Size = System::Drawing::Size(178, 22);
+			this->txtDirecPaciente->TabIndex = 7;
 			// 
 			// label4
 			// 
@@ -213,21 +216,21 @@ namespace Tarea4KD {
 			this->label1->TabIndex = 3;
 			this->label1->Text = L"Busqueda de Informes";
 			// 
-			// dataGridView1
+			// tablaInforme
 			// 
-			this->dataGridView1->AllowUserToOrderColumns = true;
-			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) {
+			this->tablaInforme->AllowUserToOrderColumns = true;
+			this->tablaInforme->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->tablaInforme->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) {
 				this->Paciente,
 					this->Column1
 			});
-			this->dataGridView1->Location = System::Drawing::Point(304, 191);
-			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->RowHeadersWidth = 51;
-			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(301, 175);
-			this->dataGridView1->TabIndex = 2;
-			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &informeForm::dataGridView1_CellContentClick);
+			this->tablaInforme->Location = System::Drawing::Point(304, 191);
+			this->tablaInforme->Name = L"tablaInforme";
+			this->tablaInforme->RowHeadersWidth = 51;
+			this->tablaInforme->RowTemplate->Height = 24;
+			this->tablaInforme->Size = System::Drawing::Size(301, 175);
+			this->tablaInforme->TabIndex = 2;
+			this->tablaInforme->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &informeForm::dataGridView1_CellContentClick);
 			// 
 			// Paciente
 			// 
@@ -265,7 +268,7 @@ namespace Tarea4KD {
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->tablaInforme))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 

@@ -42,9 +42,10 @@ namespace Tarea4KD {
 	private: System::Windows::Forms::Button^ btnMedica;
 
 	private: System::Windows::Forms::Button^ btnBoti;
+	private: System::Windows::Forms::TextBox^ txtCantidad;
 
 
-	private: System::Windows::Forms::TextBox^ textBox1;
+
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label1;
@@ -69,7 +70,7 @@ namespace Tarea4KD {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->btnMedica = (gcnew System::Windows::Forms::Button());
 			this->btnBoti = (gcnew System::Windows::Forms::Button());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->txtCantidad = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -87,7 +88,7 @@ namespace Tarea4KD {
 			this->panel1->Controls->Add(this->button3);
 			this->panel1->Controls->Add(this->btnMedica);
 			this->panel1->Controls->Add(this->btnBoti);
-			this->panel1->Controls->Add(this->textBox1);
+			this->panel1->Controls->Add(this->txtCantidad);
 			this->panel1->Controls->Add(this->label3);
 			this->panel1->Controls->Add(this->label2);
 			this->panel1->Controls->Add(this->label1);
@@ -144,12 +145,12 @@ namespace Tarea4KD {
 			this->btnBoti->UseVisualStyleBackColor = true;
 			this->btnBoti->Click += gcnew System::EventHandler(this, &boticarioForm::button2_Click);
 			// 
-			// textBox1
+			// txtCantidad
 			// 
-			this->textBox1->Location = System::Drawing::Point(389, 232);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(168, 22);
-			this->textBox1->TabIndex = 5;
+			this->txtCantidad->Location = System::Drawing::Point(389, 232);
+			this->txtCantidad->Name = L"txtCantidad";
+			this->txtCantidad->Size = System::Drawing::Size(168, 22);
+			this->txtCantidad->TabIndex = 5;
 			// 
 			// label3
 			// 
