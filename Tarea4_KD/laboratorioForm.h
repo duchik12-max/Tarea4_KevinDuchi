@@ -47,15 +47,17 @@ namespace Tarea4KD {
 	private: System::Windows::Forms::Label^ label7;
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::Label^ label5;
-	private: System::Windows::Forms::ListBox^ listBox1;
+
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::TextBox^ textBox4;
 	private: System::Windows::Forms::TextBox^ textBox3;
 	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ btnLabo;
+
 	private: System::Windows::Forms::CheckBox^ checkBox2;
 	private: System::Windows::Forms::CheckBox^ checkBox1;
+	private: System::Windows::Forms::ComboBox^ comboBox1;
 
 	private:
 		/// <summary>
@@ -72,7 +74,6 @@ namespace Tarea4KD {
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(laboratorioForm::typeid));
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
@@ -85,13 +86,14 @@ namespace Tarea4KD {
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->btnLabo = (gcnew System::Windows::Forms::Button());
 			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
 			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -100,7 +102,8 @@ namespace Tarea4KD {
 			// 
 			// panel1
 			// 
-			this->panel1->Controls->Add(this->listBox1);
+			this->panel1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"panel1.BackgroundImage")));
+			this->panel1->Controls->Add(this->comboBox1);
 			this->panel1->Controls->Add(this->textBox2);
 			this->panel1->Controls->Add(this->textBox1);
 			this->panel1->Controls->Add(this->label4);
@@ -113,16 +116,6 @@ namespace Tarea4KD {
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(530, 314);
 			this->panel1->TabIndex = 0;
-			// 
-			// listBox1
-			// 
-			this->listBox1->FormattingEnabled = true;
-			this->listBox1->ItemHeight = 16;
-			this->listBox1->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Analisis de sangre", L"Analisis de heces", L"Analisis de orina" });
-			this->listBox1->Location = System::Drawing::Point(184, 203);
-			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(165, 84);
-			this->listBox1->TabIndex = 8;
 			// 
 			// textBox2
 			// 
@@ -204,10 +197,11 @@ namespace Tarea4KD {
 			// 
 			// panel2
 			// 
+			this->panel2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"panel2.BackgroundImage")));
 			this->panel2->Controls->Add(this->textBox4);
 			this->panel2->Controls->Add(this->textBox3);
 			this->panel2->Controls->Add(this->button2);
-			this->panel2->Controls->Add(this->button1);
+			this->panel2->Controls->Add(this->btnLabo);
 			this->panel2->Controls->Add(this->checkBox2);
 			this->panel2->Controls->Add(this->checkBox1);
 			this->panel2->Controls->Add(this->label8);
@@ -237,25 +231,25 @@ namespace Tarea4KD {
 			// 
 			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button2->Location = System::Drawing::Point(361, 138);
+			this->button2->Location = System::Drawing::Point(346, 138);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(120, 50);
+			this->button2->Size = System::Drawing::Size(135, 50);
 			this->button2->TabIndex = 7;
 			this->button2->Text = L"Volver";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &laboratorioForm::button2_Click);
 			// 
-			// button1
+			// btnLabo
 			// 
-			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->btnLabo->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button1->Location = System::Drawing::Point(48, 138);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(125, 50);
-			this->button1->TabIndex = 6;
-			this->button1->Text = L"Generar Orden";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &laboratorioForm::button1_Click);
+			this->btnLabo->Location = System::Drawing::Point(48, 138);
+			this->btnLabo->Name = L"btnLabo";
+			this->btnLabo->Size = System::Drawing::Size(146, 50);
+			this->btnLabo->TabIndex = 6;
+			this->btnLabo->Text = L"Generar Orden";
+			this->btnLabo->UseVisualStyleBackColor = true;
+			this->btnLabo->Click += gcnew System::EventHandler(this, &laboratorioForm::button1_Click);
 			// 
 			// checkBox2
 			// 
@@ -319,13 +313,25 @@ namespace Tarea4KD {
 			this->label5->TabIndex = 0;
 			this->label5->Text = L"Informacion complementaria";
 			// 
+			// comboBox1
+			// 
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Examen de sangre", L"Examen de orina", L"Examen de heces" });
+			this->comboBox1->Location = System::Drawing::Point(184, 197);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(121, 24);
+			this->comboBox1->TabIndex = 8;
+			// 
 			// laboratorioForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::SystemColors::GradientActiveCaption;
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(554, 569);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"laboratorioForm";
 			this->Text = L"laboratorioForm";
 			this->panel1->ResumeLayout(false);

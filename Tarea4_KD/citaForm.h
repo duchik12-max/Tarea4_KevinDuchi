@@ -43,10 +43,13 @@ namespace Tarea4KD {
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::ListBox^ listBox1;
-	private: System::Windows::Forms::TextBox^ textBox2;
+	private: System::Windows::Forms::Button^ btnCita;
+
+
+
 	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::MonthCalendar^ monthCalendar1;
+	private: System::Windows::Forms::ComboBox^ comboBox1;
 
 	private:
 		/// <summary>
@@ -64,9 +67,7 @@ namespace Tarea4KD {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(citaForm::typeid));
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->btnCita = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -74,6 +75,8 @@ namespace Tarea4KD {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->monthCalendar1 = (gcnew System::Windows::Forms::MonthCalendar());
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -81,10 +84,11 @@ namespace Tarea4KD {
 			// 
 			// panel1
 			// 
+			this->panel1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"panel1.BackgroundImage")));
+			this->panel1->Controls->Add(this->monthCalendar1);
+			this->panel1->Controls->Add(this->comboBox1);
 			this->panel1->Controls->Add(this->button2);
-			this->panel1->Controls->Add(this->button1);
-			this->panel1->Controls->Add(this->listBox1);
-			this->panel1->Controls->Add(this->textBox2);
+			this->panel1->Controls->Add(this->btnCita);
 			this->panel1->Controls->Add(this->textBox1);
 			this->panel1->Controls->Add(this->label4);
 			this->panel1->Controls->Add(this->label3);
@@ -94,7 +98,7 @@ namespace Tarea4KD {
 			this->panel1->Controls->Add(this->pictureBox1);
 			this->panel1->Location = System::Drawing::Point(12, 12);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(543, 383);
+			this->panel1->Size = System::Drawing::Size(615, 549);
 			this->panel1->TabIndex = 0;
 			// 
 			// button2
@@ -102,7 +106,7 @@ namespace Tarea4KD {
 			this->button2->BackColor = System::Drawing::SystemColors::ActiveCaption;
 			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button2->Location = System::Drawing::Point(393, 320);
+			this->button2->Location = System::Drawing::Point(472, 484);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(129, 47);
 			this->button2->TabIndex = 10;
@@ -110,34 +114,17 @@ namespace Tarea4KD {
 			this->button2->UseVisualStyleBackColor = false;
 			this->button2->Click += gcnew System::EventHandler(this, &citaForm::button2_Click);
 			// 
-			// button1
+			// btnCita
 			// 
-			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->btnCita->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button1->Location = System::Drawing::Point(45, 320);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(134, 47);
-			this->button1->TabIndex = 9;
-			this->button1->Text = L"Agendar";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &citaForm::button1_Click);
-			// 
-			// listBox1
-			// 
-			this->listBox1->FormattingEnabled = true;
-			this->listBox1->ItemHeight = 16;
-			this->listBox1->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Doctor 1", L"Doctor 2", L"Doctor 3" });
-			this->listBox1->Location = System::Drawing::Point(167, 167);
-			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(120, 84);
-			this->listBox1->TabIndex = 8;
-			// 
-			// textBox2
-			// 
-			this->textBox2->Location = System::Drawing::Point(167, 269);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(196, 22);
-			this->textBox2->TabIndex = 7;
+			this->btnCita->Location = System::Drawing::Point(22, 484);
+			this->btnCita->Name = L"btnCita";
+			this->btnCita->Size = System::Drawing::Size(143, 47);
+			this->btnCita->TabIndex = 9;
+			this->btnCita->Text = L"Agendar";
+			this->btnCita->UseVisualStyleBackColor = true;
+			this->btnCita->Click += gcnew System::EventHandler(this, &citaForm::button1_Click);
 			// 
 			// textBox1
 			// 
@@ -151,7 +138,7 @@ namespace Tarea4KD {
 			this->label4->AutoSize = true;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label4->Location = System::Drawing::Point(42, 274);
+			this->label4->Location = System::Drawing::Point(19, 224);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(49, 18);
 			this->label4->TabIndex = 5;
@@ -162,7 +149,7 @@ namespace Tarea4KD {
 			this->label3->AutoSize = true;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label3->Location = System::Drawing::Point(42, 167);
+			this->label3->Location = System::Drawing::Point(19, 167);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(92, 18);
 			this->label3->TabIndex = 4;
@@ -173,7 +160,7 @@ namespace Tarea4KD {
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->Location = System::Drawing::Point(42, 123);
+			this->label2->Location = System::Drawing::Point(19, 124);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(62, 18);
 			this->label2->TabIndex = 3;
@@ -184,7 +171,7 @@ namespace Tarea4KD {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(196, 75);
+			this->label1->Location = System::Drawing::Point(236, 72);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(127, 22);
 			this->label1->TabIndex = 2;
@@ -193,9 +180,9 @@ namespace Tarea4KD {
 			// pictureBox2
 			// 
 			this->pictureBox2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.Image")));
-			this->pictureBox2->Location = System::Drawing::Point(422, 123);
+			this->pictureBox2->Location = System::Drawing::Point(472, 111);
 			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(100, 98);
+			this->pictureBox2->Size = System::Drawing::Size(123, 119);
 			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox2->TabIndex = 1;
 			this->pictureBox2->TabStop = false;
@@ -203,19 +190,40 @@ namespace Tarea4KD {
 			// pictureBox1
 			// 
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(3, 3);
+			this->pictureBox1->Location = System::Drawing::Point(45, 0);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(537, 69);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
 			// 
+			// comboBox1
+			// 
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(4) {
+				L"Dr. Fabian", L"Dr. Enrique", L"Dra. Milagro",
+					L"Dr. Gregory"
+			});
+			this->comboBox1->Location = System::Drawing::Point(167, 167);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(121, 24);
+			this->comboBox1->TabIndex = 11;
+			// 
+			// monthCalendar1
+			// 
+			this->monthCalendar1->Location = System::Drawing::Point(122, 224);
+			this->monthCalendar1->Name = L"monthCalendar1";
+			this->monthCalendar1->TabIndex = 12;
+			// 
 			// citaForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(567, 407);
+			this->BackColor = System::Drawing::Color::PaleTurquoise;
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->ClientSize = System::Drawing::Size(639, 573);
 			this->Controls->Add(this->panel1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"citaForm";
 			this->Text = L"citaForm";
 			this->panel1->ResumeLayout(false);

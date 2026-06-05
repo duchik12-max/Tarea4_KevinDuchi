@@ -47,11 +47,14 @@ namespace Tarea4KD {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Button^ button3;
-	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ btnInforme;
+
+	private: System::Windows::Forms::Button^ btnResumen;
+
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::PictureBox^ pictureBox2;
 
 
 
@@ -71,9 +74,10 @@ namespace Tarea4KD {
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(informeForm::typeid));
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->btnInforme = (gcnew System::Windows::Forms::Button());
+			this->btnResumen = (gcnew System::Windows::Forms::Button());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label4 = (gcnew System::Windows::Forms::Label());
@@ -85,15 +89,17 @@ namespace Tarea4KD {
 			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->panel1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// panel1
 			// 
+			this->panel1->Controls->Add(this->pictureBox2);
 			this->panel1->Controls->Add(this->button3);
-			this->panel1->Controls->Add(this->button2);
-			this->panel1->Controls->Add(this->button1);
+			this->panel1->Controls->Add(this->btnInforme);
+			this->panel1->Controls->Add(this->btnResumen);
 			this->panel1->Controls->Add(this->textBox2);
 			this->panel1->Controls->Add(this->textBox1);
 			this->panel1->Controls->Add(this->label4);
@@ -104,89 +110,106 @@ namespace Tarea4KD {
 			this->panel1->Controls->Add(this->pictureBox1);
 			this->panel1->Location = System::Drawing::Point(21, 12);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(624, 427);
+			this->panel1->Size = System::Drawing::Size(624, 465);
 			this->panel1->TabIndex = 0;
+			// 
+			// pictureBox2
+			// 
+			this->pictureBox2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.Image")));
+			this->pictureBox2->Location = System::Drawing::Point(0, 86);
+			this->pictureBox2->Name = L"pictureBox2";
+			this->pictureBox2->Size = System::Drawing::Size(159, 84);
+			this->pictureBox2->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pictureBox2->TabIndex = 12;
+			this->pictureBox2->TabStop = false;
 			// 
 			// button3
 			// 
 			this->button3->BackColor = System::Drawing::SystemColors::ActiveCaption;
-			this->button3->Location = System::Drawing::Point(461, 370);
+			this->button3->Location = System::Drawing::Point(432, 394);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(130, 37);
+			this->button3->Size = System::Drawing::Size(145, 47);
 			this->button3->TabIndex = 11;
 			this->button3->Text = L"Volver";
 			this->button3->UseVisualStyleBackColor = false;
 			this->button3->Click += gcnew System::EventHandler(this, &informeForm::button3_Click);
 			// 
-			// button2
+			// btnInforme
 			// 
-			this->button2->Location = System::Drawing::Point(51, 377);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(98, 30);
-			this->button2->TabIndex = 10;
-			this->button2->Text = L"Ver Informe";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &informeForm::button2_Click);
+			this->btnInforme->Location = System::Drawing::Point(36, 394);
+			this->btnInforme->Name = L"btnInforme";
+			this->btnInforme->Size = System::Drawing::Size(163, 47);
+			this->btnInforme->TabIndex = 10;
+			this->btnInforme->Text = L"Ver Informe";
+			this->btnInforme->UseVisualStyleBackColor = true;
+			this->btnInforme->Click += gcnew System::EventHandler(this, &informeForm::button2_Click);
 			// 
-			// button1
+			// btnResumen
 			// 
-			this->button1->Location = System::Drawing::Point(51, 314);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(98, 40);
-			this->button1->TabIndex = 9;
-			this->button1->Text = L"Ver Resumen";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &informeForm::button1_Click);
+			this->btnResumen->Location = System::Drawing::Point(36, 326);
+			this->btnResumen->Name = L"btnResumen";
+			this->btnResumen->Size = System::Drawing::Size(163, 52);
+			this->btnResumen->TabIndex = 9;
+			this->btnResumen->Text = L"Ver Resumen";
+			this->btnResumen->UseVisualStyleBackColor = true;
+			this->btnResumen->Click += gcnew System::EventHandler(this, &informeForm::button1_Click);
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(36, 256);
+			this->textBox2->Location = System::Drawing::Point(36, 285);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(163, 22);
+			this->textBox2->Size = System::Drawing::Size(178, 22);
 			this->textBox2->TabIndex = 8;
+			this->textBox2->TextChanged += gcnew System::EventHandler(this, &informeForm::textBox2_TextChanged);
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(36, 191);
+			this->textBox1->Location = System::Drawing::Point(36, 214);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(163, 22);
+			this->textBox1->Size = System::Drawing::Size(178, 22);
 			this->textBox1->TabIndex = 7;
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(429, 142);
+			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label4->Location = System::Drawing::Point(301, 161);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(65, 16);
+			this->label4->Size = System::Drawing::Size(72, 18);
 			this->label4->TabIndex = 6;
 			this->label4->Text = L"Resumen";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(33, 224);
+			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label3->Location = System::Drawing::Point(33, 254);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(116, 16);
+			this->label3->Size = System::Drawing::Size(126, 18);
 			this->label3->TabIndex = 5;
-			this->label3->Text = L"Medico Asignado:";
+			this->label3->Text = L"Médico Asignado:";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(33, 161);
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label2->Location = System::Drawing::Point(33, 182);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(66, 16);
+			this->label2->Size = System::Drawing::Size(73, 18);
 			this->label2->TabIndex = 4;
 			this->label2->Text = L"Paciente: ";
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->Location = System::Drawing::Point(205, 86);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(197, 20);
+			this->label1->Size = System::Drawing::Size(209, 22);
 			this->label1->TabIndex = 3;
 			this->label1->Text = L"Busqueda de Informes";
 			// 
@@ -198,11 +221,11 @@ namespace Tarea4KD {
 				this->Paciente,
 					this->Column1
 			});
-			this->dataGridView1->Location = System::Drawing::Point(325, 161);
+			this->dataGridView1->Location = System::Drawing::Point(304, 191);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(285, 175);
+			this->dataGridView1->Size = System::Drawing::Size(301, 175);
 			this->dataGridView1->TabIndex = 2;
 			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &informeForm::dataGridView1_CellContentClick);
 			// 
@@ -233,12 +256,15 @@ namespace Tarea4KD {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(673, 463);
+			this->BackColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->ClientSize = System::Drawing::Size(673, 489);
 			this->Controls->Add(this->panel1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"informeForm";
 			this->Text = L"informeForm";
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
@@ -257,6 +283,8 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	
+}
+private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
