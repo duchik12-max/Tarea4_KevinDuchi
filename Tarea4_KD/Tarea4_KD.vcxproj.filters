@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de encabezado\ClasesBase">
+      <UniqueIdentifier>{ba63660e-b1a5-4a4d-a427-8730d3e56f40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mainForm.cpp">
@@ -33,7 +36,7 @@
     <ClCompile Include="informeForm.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Usuario.cpp">
+    <ClCompile Include="Usuario1.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="asignacionForm.cpp">
@@ -80,7 +83,7 @@
     <ClInclude Include="informeForm.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Usuario.h">
+    <ClInclude Include="Usuario1.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="asignacionForm.h">
@@ -106,6 +109,24 @@
     </ClInclude>
     <ClInclude Include="laboratorioForm.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Director.h">
+      <Filter>Archivos de encabezado\ClasesBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Usuario.h">
+      <Filter>Archivos de encabezado\ClasesBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Perfilpaciente.h">
+      <Filter>Archivos de encabezado\ClasesBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Personal.h">
+      <Filter>Archivos de encabezado\ClasesBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Tipoperfil.h">
+      <Filter>Archivos de encabezado\ClasesBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Gestorarchivos.h">
+      <Filter>Archivos de encabezado\ClasesBase</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

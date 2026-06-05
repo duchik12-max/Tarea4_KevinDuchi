@@ -1,5 +1,5 @@
 #pragma once
-
+#include "GestorArchivos.h"
 namespace Tarea4KD {
 
 	using namespace System;
@@ -113,10 +113,6 @@ namespace Tarea4KD {
 			// comboBoxCita
 			// 
 			this->comboBoxCita->FormattingEnabled = true;
-			this->comboBoxCita->Items->AddRange(gcnew cli::array< System::Object^  >(4) {
-				L"Dr. Fabian", L"Dr. Enrique", L"Dra. Milagro",
-					L"Dr. Gregory"
-			});
 			this->comboBoxCita->Location = System::Drawing::Point(167, 167);
 			this->comboBoxCita->Name = L"comboBoxCita";
 			this->comboBoxCita->Size = System::Drawing::Size(121, 24);
@@ -229,6 +225,7 @@ namespace Tarea4KD {
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"citaForm";
 			this->Text = L"citaForm";
+			this->Load += gcnew System::EventHandler(this, &citaForm::citaForm_Load);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
@@ -242,7 +239,65 @@ namespace Tarea4KD {
 		this->Close();
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	MessageBox::Show("Cita agendada exitosamente", "Agendar Cita", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	// --- Validación de campos ---
+	if (String::IsNullOrWhiteSpace(txtCtNombre->Text))
+	{
+		MessageBox::Show("Ingresa tu nombre.","Campo requerido",MessageBoxButtons::OK,MessageBoxIcon::Warning);
+		txtCtNombre->Focus();
+		return;
+	}
+
+	if (comboBoxCita->SelectedIndex < 0)
+	{
+		MessageBox::Show("Selecciona un doctor.","Campo requerido",MessageBoxButtons::OK,MessageBoxIcon::Warning);
+		comboBoxCita->Focus();
+		return;
+	}
+
+	// --- Validación de fecha: no puede ser un día pasado ---
+	if (monthCalendarCita->SelectionStart.Date < DateTime::Today)
+	{
+		MessageBox::Show("La fecha seleccionada ya pasó.\n""Por favor selecciona una fecha a partir de hoy.","Fecha inválida",
+			MessageBoxButtons::OK,MessageBoxIcon::Warning);
+		return;
+	}
+
+	// --- Obtener valores ---
+	String^ nombre = txtCtNombre->Text->Trim();
+	String^ doctor = comboBoxCita->SelectedItem->ToString();
+	String^ fecha = monthCalendarCita->SelectionStart.ToString("dd/MM/yyyy");
+
+	// --- Guardar en citas.txt ---
+	bool guardado = HospitalApp::GestorArchivos::GuardarCita(
+		nombre, doctor, fecha);
+
+	if (guardado)
+	{
+		MessageBox::Show(
+			"Cita agendada exitosamente:\n\n"
+			"Paciente: " + nombre + "\n"
+			"Doctor:   " + doctor + "\n"
+			"Fecha:    " + fecha,
+			"Cita registrada",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Information);
+
+		// Limpiar campos
+		txtCtNombre->Clear();
+		comboBoxCita->SelectedIndex = 0;
+		txtCtNombre->Focus();
+	}
+}
+private: System::Void citaForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	monthCalendarCita->MinDate = DateTime::Today;
+	comboBoxCita->Items->Clear();
+	comboBoxCita->Items->Add("Dr. García");
+	comboBoxCita->Items->Add("Dra. Martínez");
+	comboBoxCita->Items->Add("Dr. Gregory");
+	comboBoxCita->Items->Add("Dra. Flores");
+	comboBoxCita->Items->Add("Dr. Herrera");
+	comboBoxCita->Items->Add("Dra. Vargas");
+	comboBoxCita->SelectedIndex = 0;
 }
 };
 }

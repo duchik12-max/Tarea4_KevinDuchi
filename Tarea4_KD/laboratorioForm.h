@@ -1,5 +1,5 @@
 #pragma once
-
+#include "GestorArchivos.h"
 namespace Tarea4KD {
 
 	using namespace System;
@@ -128,13 +128,9 @@ namespace Tarea4KD {
 			// comboLaboEstudio
 			// 
 			this->comboLaboEstudio->FormattingEnabled = true;
-			this->comboLaboEstudio->Items->AddRange(gcnew cli::array< System::Object^  >(3) {
-				L"Examen de sangre", L"Examen de orina",
-					L"Examen de heces"
-			});
 			this->comboLaboEstudio->Location = System::Drawing::Point(184, 197);
 			this->comboLaboEstudio->Name = L"comboLaboEstudio";
-			this->comboLaboEstudio->Size = System::Drawing::Size(121, 24);
+			this->comboLaboEstudio->Size = System::Drawing::Size(165, 24);
 			this->comboLaboEstudio->TabIndex = 8;
 			// 
 			// txtLaboFecha
@@ -280,6 +276,7 @@ namespace Tarea4KD {
 			this->checkBoxNo->TabIndex = 5;
 			this->checkBoxNo->Text = L"No";
 			this->checkBoxNo->UseVisualStyleBackColor = true;
+			this->checkBoxNo->CheckedChanged += gcnew System::EventHandler(this, &laboratorioForm::checkBoxNo_CheckedChanged);
 			// 
 			// checkBoxSi
 			// 
@@ -290,6 +287,7 @@ namespace Tarea4KD {
 			this->checkBoxSi->TabIndex = 4;
 			this->checkBoxSi->Text = L"Si";
 			this->checkBoxSi->UseVisualStyleBackColor = true;
+			this->checkBoxSi->CheckedChanged += gcnew System::EventHandler(this, &laboratorioForm::checkBoxSi_CheckedChanged);
 			// 
 			// label8
 			// 
@@ -345,6 +343,7 @@ namespace Tarea4KD {
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"laboratorioForm";
 			this->Text = L"laboratorioForm";
+			this->Load += gcnew System::EventHandler(this, &laboratorioForm::laboratorioForm_Load);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
@@ -360,7 +359,147 @@ namespace Tarea4KD {
 		this->Close();
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	MessageBox::Show("Orden generada", "Mensaje", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	// --- Validación de campos ---
+	if (String::IsNullOrWhiteSpace(txtLaboAnalista->Text))
+	{
+		MessageBox::Show(
+			"Ingresa el nombre del analista.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		txtLaboAnalista->Focus();
+		return;
+	}
+
+	if (String::IsNullOrWhiteSpace(txtLaboFecha->Text))
+	{
+		MessageBox::Show(
+			"Ingresa la fecha.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		txtLaboFecha->Focus();
+		return;
+	}
+
+	if (String::IsNullOrWhiteSpace(txtLaboPaciente->Text))
+	{
+		MessageBox::Show(
+			"Ingresa el nombre del paciente.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		txtLaboPaciente->Focus();
+		return;
+	}
+
+	if (String::IsNullOrWhiteSpace(txtLaboCorreo->Text))
+	{
+		MessageBox::Show(
+			"Ingresa el correo del paciente.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		txtLaboCorreo->Focus();
+		return;
+	}
+
+	// Validación básica de formato de correo
+	if (!txtLaboCorreo->Text->Contains("@") ||
+		!txtLaboCorreo->Text->Contains("."))
+	{
+		MessageBox::Show(
+			"Ingresa un correo electrónico válido.",
+			"Correo inválido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		txtLaboCorreo->Focus();
+		return;
+	}
+
+	if (comboLaboEstudio->SelectedIndex < 0)
+	{
+		MessageBox::Show(
+			"Selecciona el tipo de estudio.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		comboLaboEstudio->Focus();
+		return;
+	}
+
+	// Validación: debe marcarse una opción de internado
+	if (!checkBoxSi->Checked && !checkBoxNo->Checked)
+	{
+		MessageBox::Show(
+			"Indica si el paciente está internado o no.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		return;
+	}
+
+	// --- Obtener valores ---
+	String^ analista = txtLaboAnalista->Text->Trim();
+	String^ fecha = txtLaboFecha->Text->Trim();
+	String^ paciente = txtLaboPaciente->Text->Trim();
+	String^ correo = txtLaboCorreo->Text->Trim();
+	String^ estudio = comboLaboEstudio->SelectedItem->ToString();
+	bool    internado = checkBoxSi->Checked;
+
+	// --- Guardar en laboratorio.txt ---
+	bool guardado = HospitalApp::GestorArchivos::GuardarLaboratorio(
+		analista, fecha, paciente, correo, estudio, internado);
+
+	if (guardado)
+	{
+		MessageBox::Show(
+			"Registro de laboratorio guardado:\n\n"
+			"Analista:  " + analista + "\n"
+			"Fecha:     " + fecha + "\n"
+			"Paciente:  " + paciente + "\n"
+			"Correo:    " + correo + "\n"
+			"Estudio:   " + estudio + "\n"
+			"Internado: " + (internado ? "Sí" : "No"),
+			"Guardado exitosamente",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Information);
+
+		// Limpiar campos
+		txtLaboAnalista->Clear();
+		txtLaboFecha->Clear();
+		txtLaboPaciente->Clear();
+		txtLaboCorreo->Clear();
+		comboLaboEstudio->SelectedIndex = 0;
+		checkBoxSi->Checked = false;
+		checkBoxNo->Checked = false;
+		txtLaboAnalista->Focus();
+	}
+}
+private: System::Void laboratorioForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	// Cargar tipos de estudio
+	comboLaboEstudio->Items->Clear();
+	comboLaboEstudio->Items->Add("Hemograma completo");
+	comboLaboEstudio->Items->Add("Química sanguínea");
+	comboLaboEstudio->Items->Add("Cultivo bacteriano");
+	comboLaboEstudio->Items->Add("Perfil lipídico");
+	comboLaboEstudio->Items->Add("Prueba de glucosa");
+	comboLaboEstudio->Items->Add("Radiografía");
+	comboLaboEstudio->Items->Add("Análisis de orina");
+	comboLaboEstudio->Items->Add("Análisis de heces");
+	comboLaboEstudio->SelectedIndex = 0;
+
+	// Estado inicial de checkboxes: ninguno marcado
+	checkBoxSi->Checked = false;
+	checkBoxNo->Checked = false;
+}
+private: System::Void checkBoxSi_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (checkBoxSi->Checked)
+		checkBoxNo->Checked = false;
+}
+private: System::Void checkBoxNo_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (checkBoxNo->Checked)
+		checkBoxSi->Checked = false;
 }
 };
 }

@@ -46,13 +46,13 @@ namespace Tarea4KD {
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ btnAsignacion;
 
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
+
+
 	private: System::Windows::Forms::MonthCalendar^ monthCalendar1;
 	private: System::Windows::Forms::ComboBox^ comboBoxArea;
 
 	private: System::Windows::Forms::Label^ label4;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
+
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
 	protected:
 
@@ -78,9 +78,6 @@ namespace Tarea4KD {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->btnAsignacion = (gcnew System::Windows::Forms::Button());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->txtAsigNombre = (gcnew System::Windows::Forms::TextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
@@ -125,7 +122,6 @@ namespace Tarea4KD {
 			// comboBoxArea
 			// 
 			this->comboBoxArea->FormattingEnabled = true;
-			this->comboBoxArea->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Farmacia", L"Consulta", L"Laboratorio", L"Papeleo" });
 			this->comboBoxArea->Location = System::Drawing::Point(500, 139);
 			this->comboBoxArea->Name = L"comboBoxArea";
 			this->comboBoxArea->Size = System::Drawing::Size(133, 24);
@@ -173,10 +169,6 @@ namespace Tarea4KD {
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
-				this->Column1,
-					this->Column2, this->Column3
-			});
 			this->dataGridView1->Location = System::Drawing::Point(25, 489);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
@@ -184,33 +176,14 @@ namespace Tarea4KD {
 			this->dataGridView1->Size = System::Drawing::Size(431, 150);
 			this->dataGridView1->TabIndex = 5;
 			// 
-			// Column1
-			// 
-			this->Column1->HeaderText = L"Personal";
-			this->Column1->MinimumWidth = 6;
-			this->Column1->Name = L"Column1";
-			this->Column1->Width = 125;
-			// 
-			// Column2
-			// 
-			this->Column2->HeaderText = L"Area";
-			this->Column2->MinimumWidth = 6;
-			this->Column2->Name = L"Column2";
-			this->Column2->Width = 125;
-			// 
-			// Column3
-			// 
-			this->Column3->HeaderText = L"Fecha";
-			this->Column3->MinimumWidth = 6;
-			this->Column3->Name = L"Column3";
-			this->Column3->Width = 125;
-			// 
 			// txtAsigNombre
 			// 
 			this->txtAsigNombre->Location = System::Drawing::Point(41, 159);
 			this->txtAsigNombre->Name = L"txtAsigNombre";
 			this->txtAsigNombre->Size = System::Drawing::Size(167, 22);
 			this->txtAsigNombre->TabIndex = 4;
+			this->txtAsigNombre->TextChanged += gcnew System::EventHandler(this, &asignacionForm::txtAsigNombre_TextChanged);
+			this->txtAsigNombre->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &asignacionForm::txtAsigNombre_KeyPress);
 			// 
 			// label3
 			// 
@@ -265,6 +238,7 @@ namespace Tarea4KD {
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"asignacionForm";
 			this->Text = L"asignacionForm";
+			this->Load += gcnew System::EventHandler(this, &asignacionForm::asignacion_Form_Load);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
@@ -273,17 +247,118 @@ namespace Tarea4KD {
 			this->ResumeLayout(false);
 
 		}
+		
 #pragma endregion
+
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		MessageBox::Show("Volviendo al menu", "Mensaje", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		this->Close();
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	// --- Validación de campos ---
+	if (String::IsNullOrWhiteSpace(txtAsigNombre->Text))
+	{
+		MessageBox::Show(
+			"Ingresa el nombre a asignar.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		txtAsigNombre->Focus();
+		return;
+	}
+
+	if (comboBoxArea->SelectedIndex < 0)
+	{
+		MessageBox::Show(
+			"Selecciona un área.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		comboBoxArea->Focus();
+		return;
+	}
+
+	// Validación de fecha: no puede ser día pasado
+	// (respaldo por si MinDate no está activo)
+	if (monthCalendar1->SelectionStart.Date < DateTime::Today)
+	{
+		MessageBox::Show(
+			"La fecha seleccionada ya pasó.\n"
+			"Por favor selecciona una fecha a partir de hoy.",
+			"Fecha inválida",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		return;
+	}
+
+	// --- Obtener valores ---
+	String^ nombre = txtAsigNombre->Text->Trim();
+	String^ area = comboBoxArea->SelectedItem->ToString();
+	String^ fecha = monthCalendar1->SelectionStart.ToString("dd/MM/yyyy");
+
+	// --- Agregar fila a la tabla ---
+	dataGridView1->Rows->Add(nombre, area, fecha);
+
+	// --- Limpiar campos ---
+	txtAsigNombre->Clear();
+	comboBoxArea->SelectedIndex = 0;
+	txtAsigNombre->Focus();
+	/**
+	MessageBox::Show(
+		"Asignación registrada:\n"
+		"Nombre: " + nombre + "\n"
+		"Área:   " + area + "\n"
+		"Fecha:  " + fecha,
+		"Asignación exitosa",
+		MessageBoxButtons::OK,
+		MessageBoxIcon::Information);
+	/**/
 	MessageBox::Show("Datos guardados correctamente", "Mensaje", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
 }
 private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void panel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+}
+private: System::Void asignacion_Form_Load(System::Object^ sender, System::EventArgs^ e) {
+	// Cargar áreas disponibles en el ComboBox
+	comboBoxArea->Items->Clear();
+	comboBoxArea->Items->Add("Urgencias");
+	comboBoxArea->Items->Add("Pediatría");
+	comboBoxArea->Items->Add("Cirugía");
+	comboBoxArea->Items->Add("Cardiología");
+	comboBoxArea->Items->Add("Laboratorio");
+	comboBoxArea->Items->Add("Farmacia");
+	comboBoxArea->SelectedIndex = 0;
+
+	// Configurar columnas de dataGridView1
+	// Si ya definiste Column1, Column2, Column3 en el diseñador
+	// solo asigna los encabezados; si no, créalas aquí.
+	dataGridView1->Columns->Clear();
+	dataGridView1->ColumnCount = 3;
+	dataGridView1->Columns[0]->HeaderText = "Nombre";
+	dataGridView1->Columns[1]->HeaderText = "Área";
+	dataGridView1->Columns[2]->HeaderText = "Fecha";
+
+	dataGridView1->AutoSizeColumnsMode =
+		DataGridViewAutoSizeColumnsMode::Fill;
+	dataGridView1->ReadOnly = true;
+	dataGridView1->AllowUserToAddRows = false;
+	dataGridView1->SelectionMode =
+		DataGridViewSelectionMode::FullRowSelect;
+	// Bloquear días pasados en el calendario visualmente
+	monthCalendar1->MinDate = DateTime::Today;
+}
+private: System::Void txtAsigNombre_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+
+private: System::Void txtAsigNombre_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+	// Permitir: letras, espacios, tildes, ñ y backspace
+   // Bloquear: cualquier dígito del 0 al 9
+	if (Char::IsDigit(e->KeyChar))
+	{
+		e->Handled = true; // cancela el carácter, no se escribe
+	}
 }
 };
 }

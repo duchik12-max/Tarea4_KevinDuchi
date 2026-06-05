@@ -51,6 +51,7 @@ namespace Tarea4KD {
 
 
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
+	private: System::Windows::Forms::Label^ label5;
 
 	private:
 		/// <summary>
@@ -78,6 +79,7 @@ namespace Tarea4KD {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -87,6 +89,7 @@ namespace Tarea4KD {
 			// 
 			this->panel1->BackColor = System::Drawing::Color::PaleTurquoise;
 			this->panel1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"panel1.BackgroundImage")));
+			this->panel1->Controls->Add(this->label5);
 			this->panel1->Controls->Add(this->pictureBox2);
 			this->panel1->Controls->Add(this->button2);
 			this->panel1->Controls->Add(this->btnHistoria);
@@ -142,21 +145,21 @@ namespace Tarea4KD {
 			// 
 			this->txtHistDoctor->Location = System::Drawing::Point(67, 299);
 			this->txtHistDoctor->Name = L"txtHistDoctor";
-			this->txtHistDoctor->Size = System::Drawing::Size(209, 22);
+			this->txtHistDoctor->Size = System::Drawing::Size(196, 22);
 			this->txtHistDoctor->TabIndex = 7;
 			// 
 			// txtHistFecha
 			// 
 			this->txtHistFecha->Location = System::Drawing::Point(67, 233);
 			this->txtHistFecha->Name = L"txtHistFecha";
-			this->txtHistFecha->Size = System::Drawing::Size(209, 22);
+			this->txtHistFecha->Size = System::Drawing::Size(196, 22);
 			this->txtHistFecha->TabIndex = 6;
 			// 
 			// txtHistPaciente
 			// 
 			this->txtHistPaciente->Location = System::Drawing::Point(67, 165);
 			this->txtHistPaciente->Name = L"txtHistPaciente";
-			this->txtHistPaciente->Size = System::Drawing::Size(209, 22);
+			this->txtHistPaciente->Size = System::Drawing::Size(196, 22);
 			this->txtHistPaciente->TabIndex = 5;
 			// 
 			// label4
@@ -214,6 +217,15 @@ namespace Tarea4KD {
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
 			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(279, 236);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(81, 16);
+			this->label5->TabIndex = 11;
+			this->label5->Text = L"dd/MM/yyyy";
+			// 
 			// historiaForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -241,6 +253,111 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	MessageBox::Show("Buscando historia clinica...", "Mensaje", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	// --- Validación de campos ---
+	if (String::IsNullOrWhiteSpace(txtHistPaciente->Text))
+	{
+		MessageBox::Show(
+			"Ingresa el nombre del paciente.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		txtHistPaciente->Focus();
+		return;
+	}
+
+	if (String::IsNullOrWhiteSpace(txtHistFecha->Text))
+	{
+		MessageBox::Show(
+			"Ingresa la fecha de ingreso.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		txtHistFecha->Focus();
+		return;
+	}
+
+	if (String::IsNullOrWhiteSpace(txtHistDoctor->Text))
+	{
+		MessageBox::Show(
+			"Ingresa el médico asignado.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		txtHistDoctor->Focus();
+		return;
+	}
+
+	// datos quemados
+	//  paciente, fechaIngreso, medico, diagnostico, habitacion, estado 
+	cli::array<cli::array<String^>^>^ historias = {
+		gcnew cli::array<String^> {
+			"Juan Pérez",       "15/01/2026", "Dr. García",
+			"Hipertensión",     "Habitación 101", "En tratamiento"
+		},
+		gcnew cli::array<String^> {
+			"María López",      "20/01/2026", "Dra. Martínez",
+			"Diabetes tipo 2",  "Habitación 205", "En observación"
+		},
+		gcnew cli::array<String^> {
+			"Carlos Rodríguez", "05/02/2026", "Dr. Sánchez",
+			"Fractura de tibia","Habitación 310", "Post-operatorio"
+		},
+		gcnew cli::array<String^> {
+			"Ana Torres",       "10/12/2025", "Dra. Flores",
+			"Apendicitis",      "Habitación 408", "Alta médica"
+		},
+		gcnew cli::array<String^> {
+			"Pedro Castillo",   "01/06/2026", "Dr. Sánchez",
+			"Alergia severa",   "Urgencias",      "En tratamiento"
+		},
+	};
+
+	// --- Búsqueda: compara los tres campos sin distinguir mayúsculas ---
+	String^ paciente = txtHistPaciente->Text->Trim()->ToLower();
+	String^ fecha = txtHistFecha->Text->Trim();
+	String^ medico = txtHistDoctor->Text->Trim()->ToLower();
+
+	cli::array<String^>^ encontrado = nullptr;
+
+	for each (cli::array<String^> ^ fila in historias)
+	{
+		bool coincidePaciente = fila[0]->ToLower()->Contains(paciente);
+		bool coincideFecha = fila[1] == fecha;
+		bool coincideMedico = fila[2]->ToLower()->Contains(medico);
+
+		if (coincidePaciente && coincideFecha && coincideMedico)
+		{
+			encontrado = fila;
+			break;
+		}
+	}
+
+	// --- Mostrar resultado ---
+	if (encontrado != nullptr)
+	{
+		MessageBox::Show(
+			"Historia clínica encontrada:\n\n"
+			"Paciente:    " + encontrado[0] + "\n"
+			"Ingreso:     " + encontrado[1] + "\n"
+			"Médico:      " + encontrado[2] + "\n"
+			"Diagnóstico: " + encontrado[3] + "\n"
+			"Ubicación:   " + encontrado[4] + "\n"
+			"Estado:      " + encontrado[5],
+			"Historia clínica",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Information);
+	}
+	else
+	{
+		MessageBox::Show(
+			"No se encontró historia clínica para:\n\n"
+			"Paciente: " + txtHistPaciente->Text->Trim() + "\n"
+			"Fecha:    " + txtHistFecha->Text->Trim() + "\n"
+			"Médico:   " + txtHistDoctor->Text->Trim(),
+			"Sin resultados",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Information);
+	}
 }
 };
 }

@@ -1,5 +1,5 @@
 #pragma once
-
+#include "GestorArchivos.h"
 namespace Tarea4KD {
 
 	using namespace System;
@@ -236,6 +236,95 @@ namespace Tarea4KD {
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	MessageBox::Show("Obteniendo información del tratamiento", "Mensaje", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	// --- Validación de campos ---
+	if (String::IsNullOrWhiteSpace(txtTratPaciente->Text))
+	{
+		MessageBox::Show(
+			"Ingresa el nombre del paciente.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		txtTratPaciente->Focus();
+		return;
+	}
+
+	if (String::IsNullOrWhiteSpace(txtTratDoctor->Text))
+	{
+		MessageBox::Show(
+			"Ingresa el médico a cargo.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		txtTratDoctor->Focus();
+		return;
+	}
+
+	if (String::IsNullOrWhiteSpace(txtTratFecha->Text))
+	{
+		MessageBox::Show(
+			"Ingresa la fecha.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		txtTratFecha->Focus();
+		return;
+	}
+
+	// --- Verificar que el archivo existe y tiene datos ---
+	if (!HospitalApp::GestorArchivos::ArchivoTieneDatos(
+		HospitalApp::GestorArchivos::RutaHistorial))
+	{
+		MessageBox::Show(
+			"No hay registros en el historial.\n"
+			"Registra primero un paciente desde el perfil Personal.",
+			"Archivo vacío",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Information);
+		return;
+	}
+
+	// --- Buscar en historial.txt por nombre de paciente ---
+	cli::array<String^>^ resultado =
+		HospitalApp::GestorArchivos::BuscarHistorialPorPaciente(
+			txtTratPaciente->Text);
+
+	if (resultado == nullptr)
+	{
+		MessageBox::Show(
+			"No se encontró tratamiento para el paciente:\n"
+			"\"" + txtTratPaciente->Text->Trim() + "\"",
+			"Sin resultados",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Information);
+		return;
+	}
+
+	// --- Verificar que el médico también coincida ---
+	bool coincideMedico = resultado[1]->ToLower()->Contains(
+		txtTratDoctor->Text->Trim()->ToLower());
+
+	if (!coincideMedico)
+	{
+		MessageBox::Show(
+			"Se encontró el paciente pero el médico no coincide.\n\n"
+			"Médico registrado: " + resultado[1],
+			"Médico no coincide",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		return;
+	}
+
+	// --- Mostrar resultado ---
+	MessageBox::Show(
+		"Tratamiento encontrado:\n\n"
+		"Paciente:      " + resultado[0] + "\n"
+		"Médico:        " + resultado[1] + "\n"
+		"Tratamiento:   " + resultado[2] + "\n"
+		"Indicaciones:  " + resultado[3] + "\n"
+		"Fecha:         " + resultado[4],
+		"Tratamiento",
+		MessageBoxButtons::OK,
+		MessageBoxIcon::Information);
 }
 };
 }

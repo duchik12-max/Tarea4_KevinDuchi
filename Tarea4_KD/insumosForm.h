@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 namespace Tarea4KD {
 
@@ -19,13 +19,13 @@ namespace Tarea4KD {
 		{
 			InitializeComponent();
 			//
-			//TODO: agregar c�digo de constructor aqu�
+			//TODO: agregar código de constructor aquí
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// Limpiar los recursos que se est�n usando.
+		/// Limpiar los recursos que se estén usando.
 		/// </summary>
 		~insumosForm()
 		{
@@ -52,14 +52,14 @@ namespace Tarea4KD {
 
 	private:
 		/// <summary>
-		/// Variable del dise�ador necesaria.
+		/// Variable del diseñador necesaria.
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// M�todo necesario para admitir el Dise�ador. No se puede modificar
-		/// el contenido de este m�todo con el editor de c�digo.
+		/// Método necesario para admitir el Diseñador. No se puede modificar
+		/// el contenido de este método con el editor de código.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -109,7 +109,7 @@ namespace Tarea4KD {
 			// comboInsuArea
 			// 
 			this->comboInsuArea->FormattingEnabled = true;
-			this->comboInsuArea->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Farmacia", L"Consulta", L"Laboratorio", L"Quir�fano" });
+			this->comboInsuArea->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Farmacia", L"Consulta", L"Laboratorio", L"Quirófano" });
 			this->comboInsuArea->Location = System::Drawing::Point(479, 192);
 			this->comboInsuArea->Name = L"comboInsuArea";
 			this->comboInsuArea->Size = System::Drawing::Size(121, 24);
@@ -168,7 +168,7 @@ namespace Tarea4KD {
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(122, 18);
 			this->label2->TabIndex = 2;
-			this->label2->Text = L"Selecione el �rea";
+			this->label2->Text = L"Selecione el Área";
 			// 
 			// label1
 			// 
@@ -201,6 +201,7 @@ namespace Tarea4KD {
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"insumosForm";
 			this->Text = L"insumosForm";
+			this->Load += gcnew System::EventHandler(this, &insumosForm::insumosForm_Load);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
@@ -210,7 +211,93 @@ namespace Tarea4KD {
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		// --- Validación de campos ---
+		if (String::IsNullOrWhiteSpace(txtInsumo->Text))
+		{
+			MessageBox::Show(
+				"Ingresa el nombre del insumo.",
+				"Campo requerido",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Warning);
+			txtInsumo->Focus();
+			return;
+		}
 
+		if (comboInsuArea->SelectedIndex < 0)
+		{
+			MessageBox::Show(
+				"Selecciona un área.",
+				"Campo requerido",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Warning);
+			comboInsuArea->Focus();
+			return;
+		}
+
+		// --- Datos hardcodeados: insumo + área → stock disponible ---
+		// Formato: { "insumo", "área", "stock/descripción" }
+		cli::array<cli::array<String^>^>^ baseDatos = {
+			gcnew cli::array<String^> { "Guantes",        "Urgencias",     "500 unidades" },
+			gcnew cli::array<String^> { "Guantes",        "Cirugía",       "300 unidades" },
+			gcnew cli::array<String^> { "Guantes",        "Laboratorio",   "400 unidades" },
+			gcnew cli::array<String^> { "Mascarilla",     "Urgencias",     "250 unidades" },
+			gcnew cli::array<String^> { "Mascarilla",     "Cirugía",       "180 unidades" },
+			gcnew cli::array<String^> { "Jeringa",        "Urgencias",     "600 unidades" },
+			gcnew cli::array<String^> { "Jeringa",        "Pediatría",     "350 unidades" },
+			gcnew cli::array<String^> { "Jeringa",        "Farmacia",      "450 unidades" },
+			gcnew cli::array<String^> { "Bisturí",        "Cirugía",       "80 unidades"  },
+			gcnew cli::array<String^> { "Suero",          "Urgencias",     "120 bolsas"   },
+			gcnew cli::array<String^> { "Suero",          "Pediatría",     "90 bolsas"    },
+			gcnew cli::array<String^> { "Suero",          "Cardiología",   "75 bolsas"    },
+			gcnew cli::array<String^> { "Vendaje",        "Urgencias",     "300 rollos"   },
+			gcnew cli::array<String^> { "Estetoscopio",   "Cardiología",   "15 unidades"  },
+			gcnew cli::array<String^> { "Estetoscopio",   "Pediatría",     "10 unidades"  },
+			gcnew cli::array<String^> { "Termómetro",     "Urgencias",     "40 unidades"  },
+			gcnew cli::array<String^> { "Termómetro",     "Pediatría",     "30 unidades"  },
+			gcnew cli::array<String^> { "Alcohol",        "Laboratorio",   "50 litros"    },
+			gcnew cli::array<String^> { "Alcohol",        "Farmacia",      "80 litros"    },
+			gcnew cli::array<String^> { "Gasas",          "Urgencias",     "1000 unidades"},
+			gcnew cli::array<String^> { "Gasas",          "Cirugía",       "800 unidades" },
+			gcnew cli::array<String^> { "Oxígeno",        "Urgencias",     "20 tanques"   },
+			gcnew cli::array<String^> { "Oxígeno",        "Cardiología",   "15 tanques"   },
+		};
+
+		// --- Búsqueda: compara insumo y área (sin distinguir mayúsculas) ---
+		String^ insumo = txtInsumo->Text->Trim()->ToLower();
+		String^ area = comboInsuArea->SelectedItem->ToString()->ToLower();
+		String^ resultado = nullptr;
+
+		for each (cli::array<String^> ^ fila in baseDatos)
+		{
+			if (fila[0]->ToLower() == insumo &&
+				fila[1]->ToLower() == area)
+			{
+				resultado = fila[2];
+				break;
+			}
+		}
+
+		// --- Mostrar resultado ---
+		if (resultado != nullptr)
+		{
+			MessageBox::Show(
+				"Insumo:     " + txtInsumo->Text->Trim() + "\n"
+				"Área:       " + comboInsuArea->SelectedItem->ToString() + "\n"
+				"Existencia: " + resultado,
+				"Insumo encontrado",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Information);
+		}
+		else
+		{
+			MessageBox::Show(
+				"No se encontró el insumo:\n"
+				"\"" + txtInsumo->Text->Trim() + "\"\n"
+				"en el área de " + comboInsuArea->SelectedItem->ToString() + ".",
+				"Sin resultados",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Information);
+		}
 	}
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 	MessageBox::Show("Volviendo al menu", "Mensaje", MessageBoxButtons::OK, MessageBoxIcon::Information);
@@ -219,6 +306,16 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void panel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+}
+private: System::Void insumosForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	comboInsuArea->Items->Clear();
+	comboInsuArea->Items->Add("Urgencias");
+	comboInsuArea->Items->Add("Pediatría");
+	comboInsuArea->Items->Add("Cirugía");
+	comboInsuArea->Items->Add("Cardiología");
+	comboInsuArea->Items->Add("Laboratorio");
+	comboInsuArea->Items->Add("Farmacia");
+	comboInsuArea->SelectedIndex = 0;
 }
 };
 }

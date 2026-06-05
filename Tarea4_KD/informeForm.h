@@ -1,5 +1,6 @@
 #pragma once
-
+#define WIN32_LEAN_AND_MEAN
+#include "GestorArchivos.h"
 namespace Tarea4KD {
 
 	using namespace System;
@@ -42,8 +43,8 @@ namespace Tarea4KD {
 
 
 
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Paciente;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
+
+
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label1;
@@ -88,8 +89,6 @@ namespace Tarea4KD {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->tablaInforme = (gcnew System::Windows::Forms::DataGridView());
-			this->Paciente = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
@@ -113,7 +112,7 @@ namespace Tarea4KD {
 			this->panel1->Controls->Add(this->pictureBox1);
 			this->panel1->Location = System::Drawing::Point(21, 12);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(624, 465);
+			this->panel1->Size = System::Drawing::Size(809, 465);
 			this->panel1->TabIndex = 0;
 			// 
 			// pictureBox2
@@ -129,7 +128,7 @@ namespace Tarea4KD {
 			// button3
 			// 
 			this->button3->BackColor = System::Drawing::SystemColors::ActiveCaption;
-			this->button3->Location = System::Drawing::Point(432, 394);
+			this->button3->Location = System::Drawing::Point(628, 394);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(145, 47);
 			this->button3->TabIndex = 11;
@@ -210,7 +209,7 @@ namespace Tarea4KD {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.8F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(205, 86);
+			this->label1->Location = System::Drawing::Point(290, 86);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(209, 22);
 			this->label1->TabIndex = 3;
@@ -220,38 +219,20 @@ namespace Tarea4KD {
 			// 
 			this->tablaInforme->AllowUserToOrderColumns = true;
 			this->tablaInforme->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->tablaInforme->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) {
-				this->Paciente,
-					this->Column1
-			});
 			this->tablaInforme->Location = System::Drawing::Point(304, 191);
 			this->tablaInforme->Name = L"tablaInforme";
 			this->tablaInforme->RowHeadersWidth = 51;
 			this->tablaInforme->RowTemplate->Height = 24;
-			this->tablaInforme->Size = System::Drawing::Size(301, 175);
+			this->tablaInforme->Size = System::Drawing::Size(485, 175);
 			this->tablaInforme->TabIndex = 2;
 			this->tablaInforme->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &informeForm::dataGridView1_CellContentClick);
-			// 
-			// Paciente
-			// 
-			this->Paciente->HeaderText = L"Campos";
-			this->Paciente->MinimumWidth = 6;
-			this->Paciente->Name = L"Paciente";
-			this->Paciente->Width = 125;
-			// 
-			// Column1
-			// 
-			this->Column1->HeaderText = L"Datos";
-			this->Column1->MinimumWidth = 6;
-			this->Column1->Name = L"Column1";
-			this->Column1->Width = 125;
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(0, 4);
+			this->pictureBox1->Location = System::Drawing::Point(36, 1);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(621, 79);
+			this->pictureBox1->Size = System::Drawing::Size(665, 79);
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
 			// 
@@ -260,11 +241,12 @@ namespace Tarea4KD {
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->ClientSize = System::Drawing::Size(673, 489);
+			this->ClientSize = System::Drawing::Size(842, 489);
 			this->Controls->Add(this->panel1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"informeForm";
 			this->Text = L"informeForm";
+			this->Load += gcnew System::EventHandler(this, &informeForm::informeForm_Load);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
@@ -273,6 +255,8 @@ namespace Tarea4KD {
 			this->ResumeLayout(false);
 
 		}
+
+
 #pragma endregion
 	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	
@@ -285,9 +269,102 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	this->Close();
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	
+	// Validacion de campos
+	if (String::IsNullOrWhiteSpace(txtDirecPaciente->Text))
+	{
+		MessageBox::Show(
+			"Ingresa el nombre del paciente.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		txtDirecPaciente->Focus();
+		return;
+	}
+
+	if (String::IsNullOrWhiteSpace(txtDirecMedico->Text))
+	{
+		MessageBox::Show(
+			"Ingresa el medico asignado.",
+			"Campo requerido",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Warning);
+		txtDirecMedico->Focus();
+		return;
+	}
+
+	// Verificar que el archivo existe y tiene datos
+	if (!HospitalApp::GestorArchivos::ArchivoTieneDatos(
+		HospitalApp::GestorArchivos::RutaHistorial))
+	{
+		MessageBox::Show(
+			"No hay registros en el historial.",
+			"Archivo vacio",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Information);
+		return;
+	}
+
+	// Buscar en historial.txt
+	List<cli::array<String^>^>^ resultados =
+		HospitalApp::GestorArchivos::BuscarEnHistorial(
+			txtDirecPaciente->Text,
+			txtDirecMedico->Text);
+
+	// Limpiar tabla
+	tablaInforme->Rows->Clear();
+
+	if (resultados->Count == 0)
+	{
+		MessageBox::Show(
+			"No se encontraron registros para:\n"
+			"Paciente: " + txtDirecPaciente->Text + "\n"
+			"Medico: " + txtDirecMedico->Text,
+			"Sin resultados",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Information);
+		return;
+	}
+
+	// Llenar tabla con resultados
+	for each (cli::array<String^> ^ campos in resultados)
+	{
+		tablaInforme->Rows->Add(
+			campos[0],   // Paciente
+			campos[1],   // Medico
+			campos[2],   // Tratamiento
+			campos[3],   // Indicaciones
+			campos[4]    // Fecha
+		);
+	}
+
+	MessageBox::Show(
+		"Se encontraron " + resultados->Count + " registro(s).",
+		"Busqueda completada",
+		MessageBoxButtons::OK,
+		MessageBoxIcon::Information);
 }
 private: System::Void textBox2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	tablaInforme->Rows->Clear();
+}
+private: System::Void informeForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	// Limpiar y configurar columnas de tablaInforme
+	tablaInforme->Columns->Clear();
+	tablaInforme->Rows->Clear();
+
+	tablaInforme->ColumnCount = 5;
+	tablaInforme->Columns[0]->HeaderText = "Paciente";
+	tablaInforme->Columns[1]->HeaderText = "Médico";
+	tablaInforme->Columns[2]->HeaderText = "Tratamiento";
+	tablaInforme->Columns[3]->HeaderText = "Indicaciones";
+	tablaInforme->Columns[4]->HeaderText = "Fecha";
+
+	// Ajuste visual
+	tablaInforme->AutoSizeColumnsMode =
+		DataGridViewAutoSizeColumnsMode::Fill;
+	tablaInforme->ReadOnly = true;
+	tablaInforme->AllowUserToAddRows = false;
+	tablaInforme->SelectionMode =
+		DataGridViewSelectionMode::FullRowSelect;
 }
 };
 }

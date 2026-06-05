@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 namespace Tarea4KD {
 
@@ -19,13 +19,13 @@ namespace Tarea4KD {
 		{
 			InitializeComponent();
 			//
-			//TODO: agregar c�digo de constructor aqu�
+			//TODO: agregar código de constructor aquí
 			//
 		}
 
 	protected:
 		/// <summary>
-		/// Limpiar los recursos que se est�n usando.
+		/// Limpiar los recursos que se estén usando.
 		/// </summary>
 		~boticarioForm()
 		{
@@ -53,14 +53,14 @@ namespace Tarea4KD {
 
 	private:
 		/// <summary>
-		/// Variable del dise�ador necesaria.
+		/// Variable del diseñador necesaria.
 		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// M�todo necesario para admitir el Dise�ador. No se puede modificar
-		/// el contenido de este m�todo con el editor de c�digo.
+		/// Método necesario para admitir el Diseñador. No se puede modificar
+		/// el contenido de este método con el editor de código.
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -102,7 +102,6 @@ namespace Tarea4KD {
 			// comboBox1
 			// 
 			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Paracetamol", L"Ibuprofeno", L"Aspirina", L"Omeprazol" });
 			this->comboBox1->Location = System::Drawing::Point(143, 187);
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(121, 24);
@@ -216,6 +215,7 @@ namespace Tarea4KD {
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"boticarioForm";
 			this->Text = L"boticarioForm";
+			this->Load += gcnew System::EventHandler(this, &boticarioForm::boticarioForm_Load);
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
@@ -225,6 +225,102 @@ namespace Tarea4KD {
 		}
 #pragma endregion
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		// --- Validación: medicamento seleccionado ---
+		if (comboBox1->SelectedIndex < 0)
+		{
+			MessageBox::Show(
+				"Selecciona un medicamento.",
+				"Campo requerido",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Warning);
+			comboBox1->Focus();
+			return;
+		}
+
+		// --- Validación: cantidad no vacía ---
+		if (String::IsNullOrWhiteSpace(txtCantidad->Text))
+		{
+			MessageBox::Show(
+				"Ingresa la cantidad.",
+				"Campo requerido",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Warning);
+			txtCantidad->Focus();
+			return;
+		}
+
+		// --- Validación: cantidad es número entero positivo ---
+		int cantidad = 0;
+		if (!int::TryParse(txtCantidad->Text->Trim(), cantidad) || cantidad <= 0)
+		{
+			MessageBox::Show(
+				"La cantidad debe ser un número entero positivo.",
+				"Valor inválido",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Warning);
+			txtCantidad->Clear();
+			txtCantidad->Focus();
+			return;
+		}
+
+		// --- Precios hardcodeados por medicamento (precio unitario) ---
+		// Modifica los valores según los precios reales del hospital.
+		cli::array<cli::array<String^>^>^ precios = {
+			gcnew cli::array<String^> { "Paracetamol",    "0.50"  },
+			gcnew cli::array<String^> { "Ibuprofeno",     "0.75"  },
+			gcnew cli::array<String^> { "Amoxicilina",    "1.20"  },
+			gcnew cli::array<String^> { "Omeprazol",      "0.90"  },
+			gcnew cli::array<String^> { "Metformina",     "0.60"  },
+			gcnew cli::array<String^> { "Aspirina",       "0.40"  },
+			gcnew cli::array<String^> { "Loratadina",     "0.85"  },
+			gcnew cli::array<String^> { "Atorvastatina",  "1.50"  },
+			gcnew cli::array<String^> { "Azitromicina",   "2.00"  },
+			gcnew cli::array<String^> { "Diclofenaco",    "0.70"  }
+		};
+
+		// --- Buscar precio del medicamento seleccionado ---
+		String^ medicamento = comboBox1->SelectedItem->ToString();
+		double  precioUnitario = 0.0;
+		bool    encontrado = false;
+
+		for each (cli::array<String^> ^ fila in precios)
+		{
+			if (fila[0] == medicamento)
+			{
+				precioUnitario = double::Parse(fila[1],
+					System::Globalization::CultureInfo::InvariantCulture);
+				encontrado = true;
+				break;
+			}
+		}
+
+		if (!encontrado)
+		{
+			MessageBox::Show(
+				"No se encontró el precio del medicamento seleccionado.",
+				"Error",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Error);
+			return;
+		}
+
+		// --- Calcular total ---
+		double total = precioUnitario * cantidad;
+
+		// --- Mostrar resultado ---
+		MessageBox::Show(
+			"Medicamento:     " + medicamento + "\n"
+			"Precio unitario: $" + precioUnitario.ToString("F2") + "\n"
+			"Cantidad:        " + cantidad.ToString() + "\n"
+			"Total:           $" + total.ToString("F2"),
+			"Cálculo de total",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Information);
+
+		// --- Limpiar campos ---
+		txtCantidad->Clear();
+		comboBox1->SelectedIndex = 0;
+		txtCantidad->Focus();
 	}
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 	MessageBox::Show("Volviendo al menu", "Mensaje", MessageBoxButtons::OK, MessageBoxIcon::Information);
@@ -232,6 +328,20 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	MessageBox::Show("Guardando orden", "Mensaje", MessageBoxButtons::OK, MessageBoxIcon::Information);
+}
+private: System::Void boticarioForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	comboBox1->Items->Clear();
+	comboBox1->Items->Add("Paracetamol");
+	comboBox1->Items->Add("Ibuprofeno");
+	comboBox1->Items->Add("Amoxicilina");
+	comboBox1->Items->Add("Omeprazol");
+	comboBox1->Items->Add("Metformina");
+	comboBox1->Items->Add("Aspirina");
+	comboBox1->Items->Add("Loratadina");
+	comboBox1->Items->Add("Atorvastatina");
+	comboBox1->Items->Add("Azitromicina");
+	comboBox1->Items->Add("Diclofenaco");
+	comboBox1->SelectedIndex = 0;
 }
 };
 }

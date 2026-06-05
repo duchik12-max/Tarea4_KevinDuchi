@@ -1,5 +1,5 @@
 #pragma once
-#include "Usuario.h"
+#include "Usuario1.h"
 #include "menuDirecForm.h"
 #include "menuPacienForm.h"
 #include "menuPersoForm.h"
@@ -203,11 +203,11 @@ namespace Tarea4KD {
 #pragma endregion
 	
 private: System::Void btnLogin_Click(System::Object^ sender, System::EventArgs^ e) {
-	Usuario* usuarios[3];
-	usuarios[0] = new Usuario("Carlos", "dir1978Hd", "Director");
-	usuarios[1] = new Usuario("Kevin", "pac29IESS", "Paciente");
-	usuarios[2] = new Usuario("Javier", "per72Hp", "Personal");
-	Usuario user;
+	Usuario1* usuarios[3];
+	usuarios[0] = new Usuario1("Carlos", "dir19", "Director");
+	usuarios[1] = new Usuario1("Kevin", "29IESS", "Paciente");
+	usuarios[2] = new Usuario1("Javier", "per72", "Personal");
+	Usuario1 user;
 	string usuario = toStdString(txtUsuario->Text);
 	string clave = toStdString(txtClave->Text);
 	for (size_t i = 0; i < 3; i++)

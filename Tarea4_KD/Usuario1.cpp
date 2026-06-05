@@ -1,47 +1,47 @@
-#include "Usuario.h"
+#include "Usuario1.h"
 #include <iostream>
-Usuario::Usuario()
+Usuario1::Usuario1()
 {
 	usuario = "";
 	clave = "";
 	perfil = "";
 }
-Usuario::Usuario(string nusuario, string nclave, string nperfil)
+Usuario1::Usuario1(string nusuario, string nclave, string nperfil)
 {
 	this->setUsuario(nusuario);
 	this->setClave(nclave);
 	this->setPerfil(nperfil);
 }
-Usuario::~Usuario()
+Usuario1::~Usuario1()
 {
 }
 //set get
-void Usuario::setUsuario(string nusuario)
+void Usuario1::setUsuario(string nusuario)
 {
 	this->usuario = nusuario;
 }
-void Usuario::setClave(string nclave)
+void Usuario1::setClave(string nclave)
 {
 	this->clave = nclave;
 }
-void Usuario::setPerfil(string nperfil)
+void Usuario1::setPerfil(string nperfil)
 {
 	this->perfil = nperfil;
 }
-string Usuario::getUsuario()
+string Usuario1::getUsuario()
 {
 	return this->usuario;
 }
-string Usuario::getClave()
+string Usuario1::getClave()
 {
 	return this->clave;
 }
-string Usuario::getPerfil()
+string Usuario1::getPerfil()
 {
 	return this->perfil;
 }
 //metodo
-bool Usuario::verificarUsuario(string nusuario, string ncalve)
+bool Usuario1::verificarUsuario(string nusuario, string ncalve)
 {
 	bool result = false;
 	if (nusuario == this->getUsuario() && ncalve == this->getClave())

@@ -134,7 +134,7 @@
     <ClCompile Include="menuPacienForm.cpp" />
     <ClCompile Include="menuPersoForm.cpp" />
     <ClCompile Include="tratamientoForm.cpp" />
-    <ClCompile Include="Usuario.cpp" />
+    <ClCompile Include="Usuario1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="asignacionForm.h">
@@ -146,9 +146,11 @@
     <ClInclude Include="citaForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Director.h" />
     <ClInclude Include="doctorForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Gestorarchivos.h" />
     <ClInclude Include="historiaForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -176,10 +178,14 @@
     <ClInclude Include="menuPersoForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Perfilpaciente.h" />
+    <ClInclude Include="Personal.h" />
+    <ClInclude Include="Tipoperfil.h" />
     <ClInclude Include="tratamientoForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Usuario.h" />
+    <ClInclude Include="Usuario1.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="asignacionForm.resx">
