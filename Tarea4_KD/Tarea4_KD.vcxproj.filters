@@ -63,6 +63,9 @@
     <ClCompile Include="laboratorioForm.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="administradorForm.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mainForm.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="Gestorarchivos.h">
       <Filter>Archivos de encabezado\ClasesBase</Filter>
+    </ClInclude>
+    <ClInclude Include="administradorForm.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
